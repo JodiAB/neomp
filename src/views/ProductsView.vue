@@ -1,237 +1,959 @@
 <template>
-    <div class="products">
-      <h1>Products</h1>
-      <div class="product" v-for="product in productsData" :key="product.sku">
-        <div class="image" @click="viewProduct(product)" :style="{ backgroundImage: 'url(' + product.image + ')' }"></div>
-        <div class="name">{{ product.product }}</div>
-        <div class="description">{{ product.description }}</div>
-        <div class="price">{{ product.price | currency }}</div>
-        <button @click="addToCart(product)">Add to Cart</button>
-      </div>
-  
-      <!-- Modal -->
-      <div class="modalWrapper" v-if="showModal">
-        <div class="modal">
-          <i class="close" @click="hideModal">✖</i>
-          <div class="imageWrapper">
-            <div class="image" :style="{ backgroundImage: 'url(' + modalData.image + ')' }"></div>
+
+  <h1>Products</h1>
+
+  <div class="container">
+    <div class="page-inner">
+      <div class="row d-flex justify-content-center align-items-center">
+        <!-- Product 1 -->
+        <div class="el-wrapper">
+          <div class="box-up">
+            <img class="img" @click="showModal = true" src="http://code.slicecrowd.com/labs/4/images/t-shirt.png" alt="">
+            <div class="img-info">
+              <div class="info-inner">
+                <span class="p-name">I feel like Pablo</span>
+                <span class="p-company">Yeezy</span>
+              </div>
+              <div class="a-size">Available sizes : <span class="size">S , M , L , XL</span></div>
+            </div>
           </div>
-          <div class="name">{{ modalData.product }}</div>
-          <div class="description">{{ modalData.description }}</div>
-          <div class="details">{{ modalData.details }}</div>
-          <h3 class="price">{{ modalData.price | currency }}</h3>
-          <label for="modalAmount">QTY</label>
-          <input id="modalAmount" v-model="modalAmount" class="amount" @keyup.enter="modalAddToCart(modalData), hideModal()" />
-          <button @click="modalAddToCart(modalData), hideModal()">Add to Cart</button>
+          <div class="box-down">
+            <div class="h-bg">
+              <div class="h-bg-inner"></div>
+            </div>
+            <a class="cart" href="#">
+              <span class="price">$120</span>
+              <span class="add-to-cart">
+                <span class="txt">Add in cart</span>
+              </span>
+            </a>
+          </div>
+          <Modal :show-modal="showModal" @close="showModal = false" :modal-text="modalText" />
+        </div>
+   
+        <!-- Product 1 -->
+        <div class="el-wrapper">
+          <div class="box-up">
+            <img class="img" src="http://code.slicecrowd.com/labs/4/images/t-shirt.png" alt="">
+            <div class="img-info">
+              <div class="info-inner">
+                <span class="p-name">I feel like Pablo</span>
+                <span class="p-company">Yeezy</span>
+              </div>
+              <div class="a-size">Available sizes : <span class="size">S , M , L , XL</span></div>
+            </div>
+          </div>
+
+          <div class="box-down">
+            <div class="h-bg">
+              <div class="h-bg-inner"></div>
+            </div>
+
+            <a class="cart" href="#">
+              <span class="price">$120</span>
+              <span class="add-to-cart">
+                <span class="txt">Add in cart</span>
+              </span>
+            </a>
+          </div>
+        </div>
+        <!-- Product 1 -->
+        <div class="el-wrapper">
+          <div class="box-up">
+            <img class="img" src="http://code.slicecrowd.com/labs/4/images/t-shirt.png" alt="">
+            <div class="img-info">
+              <div class="info-inner">
+                <span class="p-name">I feel like Pablo</span>
+                <span class="p-company">Yeezy</span>
+              </div>
+              <div class="a-size">Available sizes : <span class="size">S , M , L , XL</span></div>
+            </div>
+          </div>
+
+          <div class="box-down">
+            <div class="h-bg">
+              <div class="h-bg-inner"></div>
+            </div>
+
+            <a class="cart" href="#">
+              <span class="price">$120</span>
+              <span class="add-to-cart">
+                <span class="txt">Add in cart</span>
+              </span>
+            </a>
+          </div>
+        </div>
+        <!-- Product 1 -->
+        <div class="el-wrapper">
+          <div class="box-up">
+            <img class="img" src="http://code.slicecrowd.com/labs/4/images/t-shirt.png" alt="">
+            <div class="img-info">
+              <div class="info-inner">
+                <span class="p-name">I feel like Pablo</span>
+                <span class="p-company">Yeezy</span>
+              </div>
+              <div class="a-size">Available sizes : <span class="size">S , M , L , XL</span></div>
+            </div>
+          </div>
+
+          <div class="box-down">
+            <div class="h-bg">
+              <div class="h-bg-inner"></div>
+            </div>
+
+            <a class="cart" href="#">
+              <span class="price">$120</span>
+              <span class="add-to-cart">
+                <span class="txt">Add in cart</span>
+              </span>
+            </a>
+          </div>
+        </div>
+
+        <!-- Product 2 -->
+        <div class="el-wrapper">
+          <div class="box-up">
+            <img class="img" src="http://code.slicecrowd.com/labs/4/images/t-shirt.png" alt="">
+            <div class="img-info">
+              <div class="info-inner">
+                <span class="p-name">I feel like Pablo</span>
+                <span class="p-company">Yeezy</span>
+              </div>
+              <div class="a-size">Available sizes : <span class="size">S , M , L , XL</span></div>
+            </div>
+          </div>
+
+          <div class="box-down">
+            <div class="h-bg">
+              <div class="h-bg-inner"></div>
+            </div>
+
+            <a class="cart" href="#">
+              <span class="price">$120</span>
+              <span class="add-to-cart">
+                <span class="txt">Add in cart</span>
+              </span>
+            </a>
+          </div>
+        </div>
+
+        <!-- Product 3 -->
+        <div class="el-wrapper">
+          <div class="box-up">
+            <img class="img" src="http://code.slicecrowd.com/labs/4/images/t-shirt.png" alt="">
+            <div class="img-info">
+              <div class="info-inner">
+                <span class="p-name">I feel like Pablo</span>
+                <span class="p-company">Yeezy</span>
+              </div>
+              <div class="a-size">Available sizes : <span class="size">S , M , L , XL</span></div>
+            </div>
+          </div>
+
+          <div class="box-down">
+            <div class="h-bg">
+              <div class="h-bg-inner"></div>
+            </div>
+
+            <a class="cart" href="#">
+              <span class="price">$120</span>
+              <span class="add-to-cart">
+                <span class="txt">Add in cart</span>
+              </span>
+            </a>
+          </div>
         </div>
       </div>
     </div>
-  </template>
-  
-  <script>
-  export default {
-    props: {
-      productsData: Array,
-      cart: Array,
-      tax: Number,
-      cartSubTotal: Number,
-      cartTotal: Number
-    },
-    data() {
-      return {
-        showModal: false,
-        modalData: {},
-        modalAmount: 1
-      };
-    },
-    methods: {
-      addToCart(product) {
-        // Your addToCart logic
-      },
-      modalAddToCart(modalData) {
-        // Your modalAddToCart logic
-      },
-      viewProduct(product) {
-        // Your viewProduct logic
-      },
-      hideModal() {
-        this.modalData = {};
-        this.showModal = false;
-      }
-    },
-    filters: {
-      currency(value) {
-        // Your currency formatting logic
-      }
-    }
-  };
-  </script>
-  
-  <style scoped>
-/* Import Google Fonts */
-@import url('https://fonts.googleapis.com/css2?family=Bitter:wght@400;400i;700&display=swap');
+  </div>
 
-/* Global styles */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: 'Bitter', serif; /* Apply Bitter font to all elements */
-}
+  <div class="container">
+    <div class="page-inner">
+      <div class="row d-flex justify-content-center align-items-center">
+        <!-- Product 1 -->
+        <div class="el-wrapper">
+          <div class="box-up">
+            <img class="img" src="http://code.slicecrowd.com/labs/4/images/t-shirt.png" alt="">
+            <div class="img-info">
+              <div class="info-inner">
+                <span class="p-name">I feel like Pablo</span>
+                <span class="p-company">Yeezy</span>
+              </div>
+              <div class="a-size">Available sizes : <span class="size">S , M , L , XL</span></div>
+            </div>
+          </div>
 
-/* Define variables */
-:root {
-  --mobile: 600px;
-  --max-width: 80em;
-}
+          <div class="box-down">
+            <div class="h-bg">
+              <div class="h-bg-inner"></div>
+            </div>
 
-/* Mixin for aspect ratio */
-.aspect-ratio {
-  position: relative;
-}
+            <a class="cart" href="#">
+              <span class="price">$120</span>
+              <span class="add-to-cart">
+                <span class="txt">Add in cart</span>
+              </span>
+            </a>
+          </div>
+        </div>
+        <!-- Product 1 -->
+        <div class="el-wrapper">
+          <div class="box-up">
+            <img class="img" src="http://code.slicecrowd.com/labs/4/images/t-shirt.png" alt="">
+            <div class="img-info">
+              <div class="info-inner">
+                <span class="p-name">I feel like Pablo</span>
+                <span class="p-company">Yeezy</span>
+              </div>
+              <div class="a-size">Available sizes : <span class="size">S , M , L , XL</span></div>
+            </div>
+          </div>
 
-.aspect-ratio:before {
-  display: block;
-  content: "";
-  width: 100%;
-}
+          <div class="box-down">
+            <div class="h-bg">
+              <div class="h-bg-inner"></div>
+            </div>
 
-.aspect-ratio > .content {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-}
+            <a class="cart" href="#">
+              <span class="price">$120</span>
+              <span class="add-to-cart">
+                <span class="txt">Add in cart</span>
+              </span>
+            </a>
+          </div>
+        </div>
+        <!-- Product 1 -->
+        <div class="el-wrapper">
+          <div class="box-up">
+            <img class="img" src="http://code.slicecrowd.com/labs/4/images/t-shirt.png" alt="">
+            <div class="img-info">
+              <div class="info-inner">
+                <span class="p-name">I feel like Pablo</span>
+                <span class="p-company">Yeezy</span>
+              </div>
+              <div class="a-size">Available sizes : <span class="size">S , M , L , XL</span></div>
+            </div>
+          </div>
 
-/* Keyframes */
-@keyframes openUp {
-  0% {
-    transform: translate(-50%, -50%) scale(0.5);
+          <div class="box-down">
+            <div class="h-bg">
+              <div class="h-bg-inner"></div>
+            </div>
+
+            <a class="cart" href="#">
+              <span class="price">$120</span>
+              <span class="add-to-cart">
+                <span class="txt">Add in cart</span>
+              </span>
+            </a>
+          </div>
+        </div>
+        <!-- Product 1 -->
+        <div class="el-wrapper">
+          <div class="box-up">
+            <img class="img" src="http://code.slicecrowd.com/labs/4/images/t-shirt.png" alt="">
+            <div class="img-info">
+              <div class="info-inner">
+                <span class="p-name">I feel like Pablo</span>
+                <span class="p-company">Yeezy</span>
+              </div>
+              <div class="a-size">Available sizes : <span class="size">S , M , L , XL</span></div>
+            </div>
+          </div>
+
+          <div class="box-down">
+            <div class="h-bg">
+              <div class="h-bg-inner"></div>
+            </div>
+
+            <a class="cart" href="#">
+              <span class="price">$120</span>
+              <span class="add-to-cart">
+                <span class="txt">Add in cart</span>
+              </span>
+            </a>
+          </div>
+        </div>
+
+        <!-- Product 2 -->
+        <div class="el-wrapper">
+          <div class="box-up">
+            <img class="img" src="http://code.slicecrowd.com/labs/4/images/t-shirt.png" alt="">
+            <div class="img-info">
+              <div class="info-inner">
+                <span class="p-name">I feel like Pablo</span>
+                <span class="p-company">Yeezy</span>
+              </div>
+              <div class="a-size">Available sizes : <span class="size">S , M , L , XL</span></div>
+            </div>
+          </div>
+
+          <div class="box-down">
+            <div class="h-bg">
+              <div class="h-bg-inner"></div>
+            </div>
+
+            <a class="cart" href="#">
+              <span class="price">$120</span>
+              <span class="add-to-cart">
+                <span class="txt">Add in cart</span>
+              </span>
+            </a>
+          </div>
+        </div>
+
+        <!-- Product 3 -->
+        <div class="el-wrapper">
+          <div class="box-up">
+            <img class="img" src="http://code.slicecrowd.com/labs/4/images/t-shirt.png" alt="">
+            <div class="img-info">
+              <div class="info-inner">
+                <span class="p-name">I feel like Pablo</span>
+                <span class="p-company">Yeezy</span>
+              </div>
+              <div class="a-size">Available sizes : <span class="size">S , M , L , XL</span></div>
+            </div>
+          </div>
+
+          <div class="box-down">
+            <div class="h-bg">
+              <div class="h-bg-inner"></div>
+            </div>
+
+            <a class="cart" href="#">
+              <span class="price">$120</span>
+              <span class="add-to-cart">
+                <span class="txt">Add in cart</span>
+              </span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="page-inner">
+      <div class="row d-flex justify-content-center align-items-center">
+        <!-- Product 1 -->
+        <div class="el-wrapper">
+          <div class="box-up">
+            <img class="img" src="http://code.slicecrowd.com/labs/4/images/t-shirt.png" alt="">
+            <div class="img-info">
+              <div class="info-inner">
+                <span class="p-name">I feel like Pablo</span>
+                <span class="p-company">Yeezy</span>
+              </div>
+              <div class="a-size">Available sizes : <span class="size">S , M , L , XL</span></div>
+            </div>
+          </div>
+
+          <div class="box-down">
+            <div class="h-bg">
+              <div class="h-bg-inner"></div>
+            </div>
+
+            <a class="cart" href="#">
+              <span class="price">$120</span>
+              <span class="add-to-cart">
+                <span class="txt">Add in cart</span>
+              </span>
+            </a>
+          </div>
+        </div>
+        <!-- Product 1 -->
+        <div class="el-wrapper">
+          <div class="box-up">
+            <img class="img" src="http://code.slicecrowd.com/labs/4/images/t-shirt.png" alt="">
+            <div class="img-info">
+              <div class="info-inner">
+                <span class="p-name">I feel like Pablo</span>
+                <span class="p-company">Yeezy</span>
+              </div>
+              <div class="a-size">Available sizes : <span class="size">S , M , L , XL</span></div>
+            </div>
+          </div>
+
+          <div class="box-down">
+            <div class="h-bg">
+              <div class="h-bg-inner"></div>
+            </div>
+
+            <a class="cart" href="#">
+              <span class="price">$120</span>
+              <span class="add-to-cart">
+                <span class="txt">Add in cart</span>
+              </span>
+            </a>
+          </div>
+        </div>
+        <!-- Product 1 -->
+        <div class="el-wrapper">
+          <div class="box-up">
+            <img class="img" src="http://code.slicecrowd.com/labs/4/images/t-shirt.png" alt="">
+            <div class="img-info">
+              <div class="info-inner">
+                <span class="p-name">I feel like Pablo</span>
+                <span class="p-company">Yeezy</span>
+              </div>
+              <div class="a-size">Available sizes : <span class="size">S , M , L , XL</span></div>
+            </div>
+          </div>
+
+          <div class="box-down">
+            <div class="h-bg">
+              <div class="h-bg-inner"></div>
+            </div>
+
+            <a class="cart" href="#">
+              <span class="price">$120</span>
+              <span class="add-to-cart">
+                <span class="txt">Add in cart</span>
+              </span>
+            </a>
+          </div>
+        </div>
+        <!-- Product 1 -->
+        <div class="el-wrapper">
+          <div class="box-up">
+            <img class="img" src="http://code.slicecrowd.com/labs/4/images/t-shirt.png" alt="">
+            <div class="img-info">
+              <div class="info-inner">
+                <span class="p-name">I feel like Pablo</span>
+                <span class="p-company">Yeezy</span>
+              </div>
+              <div class="a-size">Available sizes : <span class="size">S , M , L , XL</span></div>
+            </div>
+          </div>
+
+          <div class="box-down">
+            <div class="h-bg">
+              <div class="h-bg-inner"></div>
+            </div>
+
+            <a class="cart" href="#">
+              <span class="price">$120</span>
+              <span class="add-to-cart">
+                <span class="txt">Add in cart</span>
+              </span>
+            </a>
+          </div>
+        </div>
+
+        <!-- Product 2 -->
+        <div class="el-wrapper">
+          <div class="box-up">
+            <img class="img" src="http://code.slicecrowd.com/labs/4/images/t-shirt.png" alt="">
+            <div class="img-info">
+              <div class="info-inner">
+                <span class="p-name">I feel like Pablo</span>
+                <span class="p-company">Yeezy</span>
+              </div>
+              <div class="a-size">Available sizes : <span class="size">S , M , L , XL</span></div>
+            </div>
+          </div>
+
+          <div class="box-down">
+            <div class="h-bg">
+              <div class="h-bg-inner"></div>
+            </div>
+
+            <a class="cart" href="#">
+              <span class="price">$120</span>
+              <span class="add-to-cart">
+                <span class="txt">Add in cart</span>
+              </span>
+            </a>
+          </div>
+        </div>
+
+        <!-- Product 3 -->
+        <div class="el-wrapper">
+          <div class="box-up">
+            <img class="img" src="http://code.slicecrowd.com/labs/4/images/t-shirt.png" alt="">
+            <div class="img-info">
+              <div class="info-inner">
+                <span class="p-name">I feel like Pablo</span>
+                <span class="p-company">Yeezy</span>
+              </div>
+              <div class="a-size">Available sizes : <span class="size">S , M , L , XL</span></div>
+            </div>
+          </div>
+
+          <div class="box-down">
+            <div class="h-bg">
+              <div class="h-bg-inner"></div>
+            </div>
+
+            <a class="cart" href="#">
+              <span class="price">$120</span>
+              <span class="add-to-cart">
+                <span class="txt">Add in cart</span>
+              </span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="page-inner">
+      <div class="row d-flex justify-content-center align-items-center">
+        <!-- Product 1 -->
+        <div class="el-wrapper">
+          <div class="box-up">
+            <img class="img" src="http://code.slicecrowd.com/labs/4/images/t-shirt.png" alt="">
+            <div class="img-info">
+              <div class="info-inner">
+                <span class="p-name">I feel like Pablo</span>
+                <span class="p-company">Yeezy</span>
+              </div>
+              <div class="a-size">Available sizes : <span class="size">S , M , L , XL</span></div>
+            </div>
+          </div>
+
+          <div class="box-down">
+            <div class="h-bg">
+              <div class="h-bg-inner"></div>
+            </div>
+
+            <a class="cart" href="#">
+              <span class="price">$120</span>
+              <span class="add-to-cart">
+                <span class="txt">Add in cart</span>
+              </span>
+            </a>
+          </div>
+        </div>
+        <!-- Product 1 -->
+        <div class="el-wrapper">
+          <div class="box-up">
+            <img class="img" src="http://code.slicecrowd.com/labs/4/images/t-shirt.png" alt="">
+            <div class="img-info">
+              <div class="info-inner">
+                <span class="p-name">I feel like Pablo</span>
+                <span class="p-company">Yeezy</span>
+              </div>
+              <div class="a-size">Available sizes : <span class="size">S , M , L , XL</span></div>
+            </div>
+          </div>
+
+          <div class="box-down">
+            <div class="h-bg">
+              <div class="h-bg-inner"></div>
+            </div>
+
+            <a class="cart" href="#">
+              <span class="price">$120</span>
+              <span class="add-to-cart">
+                <span class="txt">Add in cart</span>
+              </span>
+            </a>
+          </div>
+        </div>
+        <!-- Product 1 -->
+        <div class="el-wrapper">
+          <div class="box-up">
+            <img class="img" src="http://code.slicecrowd.com/labs/4/images/t-shirt.png" alt="">
+            <div class="img-info">
+              <div class="info-inner">
+                <span class="p-name">I feel like Pablo</span>
+                <span class="p-company">Yeezy</span>
+              </div>
+              <div class="a-size">Available sizes : <span class="size">S , M , L , XL</span></div>
+            </div>
+          </div>
+
+          <div class="box-down">
+            <div class="h-bg">
+              <div class="h-bg-inner"></div>
+            </div>
+
+            <a class="cart" href="#">
+              <span class="price">$120</span>
+              <span class="add-to-cart">
+                <span class="txt">Add in cart</span>
+              </span>
+            </a>
+          </div>
+        </div>
+        <!-- Product 1 -->
+        <div class="el-wrapper">
+          <div class="box-up">
+            <img class="img" src="http://code.slicecrowd.com/labs/4/images/t-shirt.png" alt="">
+            <div class="img-info">
+              <div class="info-inner">
+                <span class="p-name">I feel like Pablo</span>
+                <span class="p-company">Yeezy</span>
+              </div>
+              <div class="a-size">Available sizes : <span class="size">S , M , L , XL</span></div>
+            </div>
+          </div>
+
+          <div class="box-down">
+            <div class="h-bg">
+              <div class="h-bg-inner"></div>
+            </div>
+
+            <a class="cart" href="#">
+              <span class="price">$120</span>
+              <span class="add-to-cart">
+                <span class="txt">Add in cart</span>
+              </span>
+            </a>
+          </div>
+        </div>
+
+        <!-- Product 2 -->
+        <div class="el-wrapper">
+          <div class="box-up">
+            <img class="img" src="http://code.slicecrowd.com/labs/4/images/t-shirt.png" alt="">
+            <div class="img-info">
+              <div class="info-inner">
+                <span class="p-name">I feel like Pablo</span>
+                <span class="p-company">Yeezy</span>
+              </div>
+              <div class="a-size">Available sizes : <span class="size">S , M , L , XL</span></div>
+            </div>
+          </div>
+
+          <div class="box-down">
+            <div class="h-bg">
+              <div class="h-bg-inner"></div>
+            </div>
+
+            <a class="cart" href="#">
+              <span class="price">$120</span>
+              <span class="add-to-cart">
+                <span class="txt">Add in cart</span>
+              </span>
+            </a>
+          </div>
+        </div>
+
+        <!-- Product 3 -->
+        <div class="el-wrapper">
+          <div class="box-up">
+            <img class="img" src="http://code.slicecrowd.com/labs/4/images/t-shirt.png" alt="">
+            <div class="img-info">
+              <div class="info-inner">
+                <span class="p-name">I feel like Pablo</span>
+                <span class="p-company">Yeezy</span>
+              </div>
+              <div class="a-size">Available sizes : <span class="size">S , M , L , XL</span></div>
+            </div>
+          </div>
+
+          <div class="box-down">
+            <div class="h-bg">
+              <div class="h-bg-inner"></div>
+            </div>
+
+            <a class="cart" href="#">
+              <span class="price">$120</span>
+              <span class="add-to-cart">
+                <span class="txt">Add in cart</span>
+              </span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</template>
+
+<script>
+import SinglePro from '../views/ProductsView.vue'
+export default {
+  components: {
+    SinglePro
+  },
+  data() {
+    return {
+      showModal: false
+    };
   }
-  100% {
-    transform: translate(-50%, -50%) scale(1);
-  }
+}
+</script>
+
+<style scoped>
+body,
+html {
+  height: 100%;
 }
 
-/* Button styles */
-button {
-  appearance: none;
-  padding: 0.5em;
-  margin: 0.5em 0;
-  background: white;
-  border: 1px solid black;
-  transition: all 0.1s;
-  font-size: 14px;
-  cursor: pointer;
-  user-select: none;
-}
+.d-flex {
 
-button:hover {
-  color: white;
-  background: black;
-}
-
-/* Input styles */
-input {
-  display: inline-block;
-  appearance: none;
-  padding: 0.5em;
-  margin: 0.5em 0.5em 0.5em 0;
-  width: 50px;
-  background: white;
-  border: 1px solid black;
-  transition: all 0.1s;
-  font-size: 14px;
-}
-
-/* Label styles */
-label {
-  font-size: 0.75em;
-  margin-right: 0.5em;
-}
-
-/* Checkout area styles */
-.checkout-area table {
-  margin: 0 auto;
-  padding: 0.5em;
-  width: 100%;
-  max-width: var(--max-width);
-  text-align: left;
-}
-
-.checkout-area th,
-.checkout-area td {
-  padding: 0 0.25em;
-}
-
-@media (max-width: var(--mobile)) {
-  .checkout-area th:nth-child(3),
-  .checkout-area td:nth-child(3) {
-    display: none;
-  }
-}
-
-/* Alignment utility classes */
-.align-left {
-  text-align: left;
+  display: flex;
+  justify-content: space-around;
 }
 
 .align-center {
-  text-align: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
 }
 
-.align-right {
-  text-align: right;
+.flex-centerY-centerX {
+  justify-content: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
 }
 
-.vert-bottom {
-  vertical-align: bottom;
+body {
+  background-color: #f7f7f7;
 }
 
-.vert-middle {
+.page-wrapper {
+  height: 100%;
+  display: table;
+}
+
+.page-wrapper .page-inner {
+  display: table-cell;
   vertical-align: middle;
 }
 
-/* Main wrapper styles */
-.main-wrapper .header {
-  position: relative;
-  background: linear-gradient(to left, #16222A, #3A6073);
-  background-size: cover;
-  height: 25em;
-  width: 100vw;
-  box-shadow: inset -1px -3px 5px rgba(0, 0, 0, 0.5), inset 1px 3px 5px rgba(0, 0, 0, 0.5);
+.el-wrapper {
+  width: 360px;
+  padding: 15px;
+  margin: 15px;
+  background-color: #fff;
 }
 
-.main-wrapper .header h1 {
-  position: absolute;
+@media (max-width: 991px) {
+  .el-wrapper {
+    width: 345px;
+  }
+}
+
+@media (max-width: 767px) {
+  .el-wrapper {
+    width: 290px;
+    margin: 30px auto;
+  }
+}
+
+.el-wrapper:hover .h-bg {
+  left: 0px;
+}
+
+.el-wrapper:hover .price {
+  left: 20px;
+  -webkit-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  -o-transform: translateY(-50%);
+  transform: translateY(-50%);
+  color: #818181;
+}
+
+.el-wrapper:hover .add-to-cart {
+  left: 50%;
+}
+
+.el-wrapper:hover .img {
+  webkit-filter: blur(7px);
+  -o-filter: blur(7px);
+  -ms-filter: blur(7px);
+  filter: blur(7px);
+  filter: progid:DXImageTransform.Microsoft.Blur(pixelradius='7', shadowopacity='0.0');
+  opacity: 0.4;
+}
+
+.el-wrapper:hover .info-inner {
+  bottom: 155px;
+}
+
+.el-wrapper:hover .a-size {
+  -webkit-transition-delay: 300ms;
+  -o-transition-delay: 300ms;
+  transition-delay: 300ms;
+  bottom: 50px;
+  opacity: 1;
+}
+
+.el-wrapper .box-down {
+  width: 100%;
+  height: 60px;
+  position: relative;
+  overflow: hidden;
+}
+
+.el-wrapper .box-up {
+  width: 100%;
+  height: 300px;
+  position: relative;
+  overflow: hidden;
   text-align: center;
+}
+
+.el-wrapper .img {
+  padding: 20px 0;
+  -webkit-transition: all 800ms cubic-bezier(0, 0, 0.18, 1);
+  -moz-transition: all 800ms cubic-bezier(0, 0, 0.18, 1);
+  -o-transition: all 800ms cubic-bezier(0, 0, 0.18, 1);
+  transition: all 800ms cubic-bezier(0, 0, 0.18, 1);
+  /* ease-out */
+  -webkit-transition-timing-function: cubic-bezier(0, 0, 0.18, 1);
+  -moz-transition-timing-function: cubic-bezier(0, 0, 0.18, 1);
+  -o-transition-timing-function: cubic-bezier(0, 0, 0.18, 1);
+  transition-timing-function: cubic-bezier(0, 0, 0.18, 1);
+  /* ease-out */
+}
+
+.h-bg {
+  -webkit-transition: all 800ms cubic-bezier(0, 0, 0.18, 1);
+  -moz-transition: all 800ms cubic-bezier(0, 0, 0.18, 1);
+  -o-transition: all 800ms cubic-bezier(0, 0, 0.18, 1);
+  transition: all 800ms cubic-bezier(0, 0, 0.18, 1);
+  /* ease-out */
+  -webkit-transition-timing-function: cubic-bezier(0, 0, 0.18, 1);
+  -moz-transition-timing-function: cubic-bezier(0, 0, 0.18, 1);
+  -o-transition-timing-function: cubic-bezier(0, 0, 0.18, 1);
+  transition-timing-function: cubic-bezier(0, 0, 0.18, 1);
+  /* ease-out */
+  width: 660px;
+  height: 100%;
+  background-color: #3f96cd;
+  position: absolute;
+  left: -659px;
+}
+
+.h-bg .h-bg-inner {
+  width: 50%;
+  height: 100%;
+  background-color: #464646;
+}
+
+.info-inner {
+  -webkit-transition: all 400ms cubic-bezier(0, 0, 0.18, 1);
+  -moz-transition: all 400ms cubic-bezier(0, 0, 0.18, 1);
+  -o-transition: all 400ms cubic-bezier(0, 0, 0.18, 1);
+  transition: all 400ms cubic-bezier(0, 0, 0.18, 1);
+  /* ease-out */
+  -webkit-transition-timing-function: cubic-bezier(0, 0, 0.18, 1);
+  -moz-transition-timing-function: cubic-bezier(0, 0, 0.18, 1);
+  -o-transition-timing-function: cubic-bezier(0, 0, 0.18, 1);
+  transition-timing-function: cubic-bezier(0, 0, 0.18, 1);
+  /* ease-out */
+  position: absolute;
+  width: 100%;
+  bottom: 25px;
+}
+
+.info-inner .p-name,
+.info-inner .p-company {
+  display: block;
+}
+
+.info-inner .p-name {
+  font-family: 'PT Sans', sans-serif;
+  font-size: 18px;
+  color: #252525;
+}
+
+.info-inner .p-company {
+  font-family: 'Lato', sans-serif;
+  font-size: 12px;
+  text-transform: uppercase;
+  color: #8c8c8c;
+}
+
+.a-size {
+  -webkit-transition: all 300ms cubic-bezier(0, 0, 0.18, 1);
+  -moz-transition: all 300ms cubic-bezier(0, 0, 0.18, 1);
+  -o-transition: all 300ms cubic-bezier(0, 0, 0.18, 1);
+  transition: all 300ms cubic-bezier(0, 0, 0.18, 1);
+  /* ease-out */
+  -webkit-transition-timing-function: cubic-bezier(0, 0, 0.18, 1);
+  -moz-transition-timing-function: cubic-bezier(0, 0, 0.18, 1);
+  -o-transition-timing-function: cubic-bezier(0, 0, 0.18, 1);
+  transition-timing-function: cubic-bezier(0, 0, 0.18, 1);
+  /* ease-out */
+  position: absolute;
+  width: 100%;
+  bottom: -20px;
+  font-family: 'PT Sans', sans-serif;
+  color: #828282;
+  opacity: 0;
+}
+
+.a-size .size {
+  color: #252525;
+}
+
+.cart {
+  display: block;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  font-family: 'Lato', sans-serif;
+  font-weight: 700;
+}
+
+.cart .price {
+  -webkit-transition: all 600ms cubic-bezier(0, 0, 0.18, 1);
+  -moz-transition: all 600ms cubic-bezier(0, 0, 0.18, 1);
+  -o-transition: all 600ms cubic-bezier(0, 0, 0.18, 1);
+  transition: all 600ms cubic-bezier(0, 0, 0.18, 1);
+  /* ease-out */
+  -webkit-transition-timing-function: cubic-bezier(0, 0, 0.18, 1);
+  -moz-transition-timing-function: cubic-bezier(0, 0, 0.18, 1);
+  -o-transition-timing-function: cubic-bezier(0, 0, 0.18, 1);
+  transition-timing-function: cubic-bezier(0, 0, 0.18, 1);
+  /* ease-out */
+  -webkit-transition-delay: 100ms;
+  -o-transition-delay: 100ms;
+  transition-delay: 100ms;
+  display: block;
+  position: absolute;
   top: 50%;
   left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  -o-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
-  color: white;
-  font-size: 3em;
-  text-shadow: 1px 3px 5px rgba(0, 0, 0, 0.5), -1px -3px 5px rgba(0, 0, 0, 0.5);
+  font-size: 16px;
+  color: #252525;
 }
 
-/* Vue styles */
-#vue {
-  margin: 0 auto;
-  padding: 0.5em;
-  text-align: center;
+.cart .add-to-cart {
+  -webkit-transition: all 600ms cubic-bezier(0, 0, 0.18, 1);
+  -moz-transition: all 600ms cubic-bezier(0, 0, 0.18, 1);
+  -o-transition: all 600ms cubic-bezier(0, 0, 0.18, 1);
+  transition: all 600ms cubic-bezier(0, 0, 0.18, 1);
+  /* ease-out */
+  -webkit-transition-timing-function: cubic-bezier(0, 0, 0.18, 1);
+  -moz-transition-timing-function: cubic-bezier(0, 0, 0.18, 1);
+  -o-transition-timing-function: cubic-bezier(0, 0, 0.18, 1);
+  transition-timing-function: cubic-bezier(0, 0, 0.18, 1);
+  /* ease-out */
+  -webkit-transition-delay: 100ms;
+  -o-transition-delay: 100ms;
+  transition-delay: 100ms;
+  display: block;
+  position: absolute;
+  top: 50%;
+  left: 110%;
+  -webkit-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  -o-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
 }
 
-#vue .cart {
-  position: fixed;
-  right: 0em;
-  top: 0em;
-  text-align: right;
-  background: rgba(0, 0, 0, 0.85);
-  color: white;
-  z-index: 1;
+.cart .add-to-cart .txt {
+  font-size: 12px;
+  color: #fff;
+  letter-spacing: 0.045em;
+  text-transform: uppercase;
+  white-space: nowrap;
 }
-
-/* More styles... */
-
-  </style>
-  
+</style>

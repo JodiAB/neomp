@@ -2,7 +2,7 @@
   <div>
  <Navi/>
   <router-view/>
-
+<Footer/>
   </div>
 </template>
 <script>

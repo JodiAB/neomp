@@ -21,6 +21,7 @@ export default {
     padding: 10px;
     background-color: transparent;
     text-align: right;
+    
   }
   
   nav a {
