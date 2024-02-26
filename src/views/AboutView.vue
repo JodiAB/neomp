@@ -1,18 +1,14 @@
 <template>
   <div class="body">
     <h1 class="heading">
-      Welcome to Company Name
+      Welcome to Titan Treasures
     </h1>
     <h2 class="sub-heading">
-      At [Your Company Name], we are committed to revolutionizing [industry/sector]. Since our inception, we've been dedicated to [mission/goal], striving to [what you aim to achieve].
+      At Titan Treasures, we are committed to revolutionizing the men's jewelry industry. Since our inception, we've been dedicated to providing high-quality, stylish jewelry pieces that redefine masculine elegance, striving to empower men to express their individuality and elevate their personal style with confidence.
     </h2>
 
-    <p class="para">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Libero rerum eius impedit error cumque earum quidem doloremque, ducimus iusto perferendis eum facilis a, debitis, molestias reprehenderit sint accusamus aperiam esse praesentium aliquam vero aliquid quod? Molestiae, tempore ratione minus deleniti molestias esse deserunt quasi iusto consequuntur eos dolorem est! Consequatur?</p>
 
-    <div class="banner-container">
-      <h1>Get A Discount</h1>
-      <h2>with your first purchase</h2>
-    </div>
+    
 
     
     <div class="centerflipcards">
@@ -20,10 +16,10 @@
           <div class='square' >
               <div class="square-container">
                   <div class="align-center"></div>
-                  <h2 class="textshadow">
+                  <h2 id="glass">
                     Our Values
                   </h2>
-                  <img class="PI" >
+             
                  
               </div>
               <div class="flip-overlay"></div>
@@ -31,8 +27,8 @@
           <div class='square2'>
               <div class="square-container2">
                   <div class="align-center">
-                    <p>
-                      Integrity, innovation, and excellence are at the core of everything we do. We believe in [value 1], [value 2], and [value 3], and we uphold these principles in every interaction, both internally and externally.
+                    <p id="bomb">
+                      Integrity, innovation, and excellence are at the core of everything we do. We believe in integrity, innovation, and excellence, and we uphold these principles in every interaction, both internally and externally.
                     </p>
                   </div>
                
@@ -54,15 +50,15 @@
           <div class='square' data-image="https://iili.io/J74tsu1.md.png">
               <div class="square-container">
                   <div class="align-center boxshadow" src="https://iili.io/J74tsu1.md.png" alt="J74tsu1.md.png" border="0" ></div>
-                  <h2 class="textshadow"> What We Do</h2>
-                  <img class="PI" >
+                  <h2 id="glass"> What We Do</h2>
+                  
               </div>
               <div class="flip-overlay"></div>
           </div>
           <div class='square2' >
               <div class="square-container2">
                   <div class="align-center">
-                    <p>  We are a team of passionate [professionals/experts] who believe in the power of [industry/sector]. Our diverse backgrounds and expertise allow us to approach challenges from multiple perspectives, ensuring innovative solutions that drive success.</p>
+                    <p id="bomb">  We are a team of passionate professionals who believe in the power of the men's jewelry industry. Our diverse backgrounds and expertise allow us to approach challenges from multiple perspectives, ensuring innovative solutions that drive success.</p>
                   </div>
                   <br>
                   <br>
@@ -82,18 +78,18 @@
           <div class='square '>
               <div class="square-container ">
                   <div class="align-center"><img src="http://titanicthemes.com/files/flipbox/kallyas2.png" class="boxshadow" alt=""></div>
-                  <h2 class="textshadow">
+                  <h2 id="glass">
                     Who We Are
                   </h2>
-                  <img class="PI">
+                 
               </div>
               <div class="flip-overlay"></div>
           </div>
           <div class='square2' data-image="http://titanicthemes.com/files/flipbox/kallyas-wedding.jpg">
               <div class="square-container2">
                   <div class="align-center">
-                    <p>
-                      We are a team of passionate [professionals/experts] who believe in the power of [industry/sector]. Our diverse backgrounds and expertise allow us to approach challenges from multiple perspectives, ensuring innovative solutions that drive success.
+                    <p id="bomb">
+                      We are a team of passionate experts who believe in the power of the men's jewelry industry. Our diverse backgrounds and expertise allow us to approach challenges from multiple perspectives, ensuring innovative solutions that drive success.
                     </p>
                   </div>
                   
@@ -105,32 +101,60 @@
               </div>
               <div class="flip-overlay"></div>
           </div>
+        </div>
+        
+        <div>
+          
+          
+                <h1 class="heading">Why Choose Us</h1>
+
+      <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+
+
+<div class="ab">
+
+</div>
+<!-- end ab -->
+   
+   <div class="content">
+      <!-- card -->
+      <div class="food">
+         
+            <div class="icon"><i class='bx bxs-business bx-tada' ></i></div>
+            <p class="title">Expertise</p>
+            <p class="text">Our team brings years of experience and a deep understanding of men's jewelry industry.</p>
+         
       </div>
+      <!-- end card -->
+      <!-- card -->
+      <div class="food">
+         
+            <div class="icon"><i class='bx bxs-heart bx-tada' ></i></div>
+            <p class="title">Customer-Centric Approach</p>
+            <p class="text">We prioritize our clients' needs, ensuring personalized solutions and unparalleled support.</p>
+         
+      </div>
+      <!-- end card -->
+      <!-- card -->
+      <div class="food">
+         
+            <div class="icon"><i class='bx bx-trending-up bx-tada' ></i></div>
+            <p class="title">Results-Driven</p>
+            <p class="text">We embrace change and constantly seek ways to innovate and improve our offerings.</p>
+         
+      </div>
+      <!-- end card -->
+   
+
+   
+   </div>
+</div>
+
     
-    <div>
-      <h1>Why Choose Us</h1>
-      <h3>Expertise</h3>
-      <p>Our team brings years of experience and a deep understanding of [industry/sector].</p>
-
-
-      <h3>Customer-Centric Approach</h3>
-      <p>We prioritize our clients' needs, ensuring personalized solutions and unparalleled support.</p>
-
-
-      <h3>Results-Driven</h3>
-      <p>We are committed to delivering measurable results that drive growth and success.</p>
-
-
-
-      <h3>Continuous Improvement</h3>
-      <p>We embrace change and constantly seek ways to innovate and improve our offerings.</p>
-
-      
     </div>
 
   </div>
 
-  </div>
 </template>
 <script>
 export default {
@@ -138,45 +162,73 @@ export default {
 }
 </script>
 <style scoped>
-.body{
-  background: rgb(70, 101, 111);
-  height: 200vh;
 
+.bx{
+  font-size: 40px;
+}
+.body{
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  width: 100%;
+  height: 100vh;
+  background: linear-gradient(-50deg, rgb(244, 238, 129), #060606, rgb(7, 7, 7), #9f9da0);
+  background-size: 200% 200%; /* Increase the size to cover the entire animation */
+  animation: fire 7s ease infinite;
+  height: 200vh;
+}
+
+@keyframes fire {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+  
+}
+#glass{
+  color: rgb(249, 239, 136);
+  text-align: center;
+  font-size: 30px;
+  text-transform: uppercase;
+}
+
+#bomb{
+  color: rgb(249, 239, 136);
+  text-align: center;
+  font-size: 15px;
+  text-transform: uppercase;
 }
   .heading{
-    display: flex;
-    justify-content: center;
+    font-size: 60px;
+    text-transform: uppercase;
+    font-family: 'Gambetta', serif;
+    letter-spacing: -3px;
+    transition: 700ms ease;
+    font-variation-settings: "wght" 311;
+    margin-bottom: 0.8rem;
+    color: PaleGoldenRod;
+    outline: none;
     text-align: center;
-    color: black;
     z-index: 100;
   }
+  .heading:hover{
+    font-variation-settings: "wght" 582; 
+    letter-spacing: 1px;
+  }
 
-  .sub-heading{
-    display: flex;
-    justify-content: center;
+  .sub-heading {
+    font-size: 1.2em;
+    line-height: 150%;
     text-align: center;
-    color: aliceblue;
+    color: MintCream;
+    letter-spacing: .5px;
   }
-  .banner-container{
-    position: relative;
-    left: 75px;
-    width: 1300px;
-    height: 250px;
-    border-radius: 14px;
-    z-index: 1111;
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    box-shadow: 20px 20px 60px #bebebe, -20px -20px 60px #ffffff;
-    background-image: url('https://i.gifer.com/fxTQ.gif'); /* Replace 'your-image-url.jpg' with the path to your image */
-  background-size: cover; /* Ensures the background image covers the entire container */
-  background-position: center; /* Centers the background image */
-    gap: 1rem;
-   margin-bottom: 40px;
-   margin-top: 40px;
-  }
+
+  
 
   .container {
     display: flex;
@@ -198,7 +250,7 @@ export default {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    box-shadow: 20px 20px 60px #bebebe, -20px -20px 60px #ffffff;
+    box-shadow: 10px 10px 30px #bebebe, -10px -10px 30px #ffffff;
   }
   
   .bg {
@@ -272,9 +324,7 @@ export default {
     font-size: 10px;
   }
 
-  button{
-    margin-right: 10px;
-}
+
 .square-flip{
     -webkit-perspective: 1000;
     -moz-perspective: 1000;
@@ -291,7 +341,7 @@ export default {
     -ms-transform-style: preserve-3d; 
     transform-style: preserve-3d; 
 
-    /*border:1px solid #efefef;*/
+
     
     position:relative;
     float:left;
@@ -505,7 +555,6 @@ transform: translateY(-50%) translateX(0px)  scale(1);
     }
 
     
-    /*You can delete this style*/
     .centerflipcards{
   display:block;
         width:1330px;
@@ -514,14 +563,7 @@ transform: translateY(-50%) translateX(0px)  scale(1);
         margin:0 auto;
         margin-top:25px;
     }
-    .centerflipcardsb{
-        display:block;
-        width:1330px;
-  height:440px;
-        text-align:center;
-        margin:0 auto;
-        margin-top:25px;
-    }
+    
 .clearfix{clear:both;}
 .centerflipcards p{
   font-family:"Open Sans";
@@ -529,9 +571,7 @@ transform: translateY(-50%) translateX(0px)  scale(1);
   margin-top:10px;
   font-weight:700;
 }
-.PI{
-    width:100%;
-}
+
 @media only screen and (min-width: 375px) and (max-width: 768px) {
 
     .centerflipcards{
@@ -552,5 +592,247 @@ transform: translateY(-50%) translateX(0px)  scale(1);
     }
 
 }
+
+
+
+.ab {
+  position: fixed;
+  z-index: 10;
+  bottom: 10px;
+  right: 10px;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-end;
+  transition: all 0.2s ease;
+}
+
+.ab .bg_links {
+  width: 40px;
+  height: 40px;
+  border-radius: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(255, 255, 255, 0.2);
+  border-radius: 100%;
+  backdrop-filter: blur(5px);
+  position: absolute;
+}
+
+.ab .logo {
+  width: 40px;
+  height: 40px;
+  z-index: 9;
+  background-image: url(https://rafaelalucas91.github.io/assets/codepen/logo_white.svg);
+  background-size: 50%;
+  background-repeat: no-repeat;
+  background-position: 10px 7px;
+  opacity: 0.9;
+  transition: all 1s 0.2s ease;
+  bottom: 0;
+  right: 0;
+}
+
+.ab .social {
+  opacity: 0;
+  right: 0;
+  bottom: 0;
+}
+
+.ab .social .icon {
+  width: 100%;
+  height: 100%;
+  background-size: 20px;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-color: transparent;
+  display: flex;
+  transition: all 0.2s ease, background-color 0.4s ease;
+  opacity: 0;
+  border-radius: 100%;
+}
+
+.ab .social.portfolio .icon {
+  background-image: url(https://rafaelalucas91.github.io/assets/codepen/link.svg);
+}
+
+.ab .social.dribbble .icon {
+  background-image: url(https://rafaelalucas91.github.io/assets/codepen/dribbble.svg);
+}
+
+.ab .social.linkedin .icon {
+  background-image: url(https://rafaelalucas91.github.io/assets/codepen/linkedin.svg);
+}
+
+.ab:hover {
+  width: 105px;
+  height: 105px;
+  transition: all 0.6s cubic-bezier(0.64, 0.01, 0.07, 1.65);
+}
+
+.ab:hover .logo {
+  opacity: 1;
+  transition: all 0.6s ease;
+}
+
+.ab:hover .social {
+  opacity: 1;
+}
+
+.ab:hover .social .icon {
+  opacity: 0.9;
+  font-size: 50px;
+}
+
+.ab:hover .social.portfolio {
+  right: 0;
+  bottom: calc(100% - 40px);
+  transition: all 0.3s cubic-bezier(0.64, 0.01, 0.07, 1.65);
+}
+
+.ab:hover .social.dribbble {
+  bottom: 45%;
+  right: 45%;
+  transition: all 0.3s cubic-bezier(0.64, 0.01, 0.07, 1.65) 0.15s;
+}
+
+.ab:hover .social.linkedin {
+  bottom: 0;
+  right: calc(100% - 40px);
+  transition: all 0.3s cubic-bezier(0.64, 0.01, 0.07, 1.65) 0.25s;
+}
+
+.wrapper {
+  width: 100vw;
+  margin: 0 auto;
+  height: 400px;
+  background-color: #161616;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+@media screen and (max-width: 767px) {
+  .wrapper {
+     height: 700px;
+  }
+}
+
+.content {
+  max-width: 1024px;
+  width: 100%;
+  padding: 0 4%;
+  padding-top: 50px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@media screen and (max-width: 767px) {
+  .content {
+     padding-top: 300px;
+     flex-direction: column;
+  }
+}
+
+.food {
+  width: 100%;
+  max-width: 300px;
+  min-width: 200px;
+  height: 250px;
+  background-color: #292929;
+  margin: 10px;
+  border-radius: 10px;
+  box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.24);
+  border: 2px solid rgba(7, 7, 7, 0.12);
+  font-size: 16px;   
+  transition: all 0.3s ease;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.icon {
+  margin: 0 auto;
+  width: 100%;
+  height: 80px;
+  max-width:80px;
+  background: linear-gradient(90deg, #FF7E7E 0%, #FF4848 40%, rgba(0, 0, 0, 0.28) 60%);
+  border-radius: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  transition: all 0.8s ease;
+  background-position: 0px;
+  background-size: 200px;
+}
+
+.material-icons.md-18 { font-size: 18px; }
+.material-icons.md-24 { font-size: 24px; }
+.material-icons.md-36 { font-size: 36px; }
+.material-icons.md-48 { font-size: 48px; }
+
+.food .title {
+  width: 100%;
+  margin: 0;
+  text-align: center;
+  margin-top: 30px;
+  color: white;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 4px;
+}
+
+.food .text {
+  width: 80%;
+  margin: 0 auto;
+  font-size: 13px;
+  text-align: center;
+  margin-top: 20px;
+  color: white;
+  font-weight: 200;
+  letter-spacing: 2px;
+  opacity: 0;
+  max-height:0;
+  transition: all 0.3s ease;
+}
+
+.food:hover {
+  height: 270px;
+}
+
+.food:hover .info {
+  height: 90%;
+}
+
+.food:hover .text {
+  transition: all 0.3s ease;
+  opacity: 1;
+  max-height:40px;
+}
+
+.food:hover .icon {
+  background-position: -120px;
+  transition: all 0.3s ease;
+}
+
+.food:hover .icon i {
+  background: linear-gradient(90deg, #FF7E7E, #FF4848);
+  -webkit-background-clip: text;
+ -webkit-text-fill-color: transparent;
+  opacity: 1;
+  transition: all 0.3s ease;
+}
+
   
 </style>
