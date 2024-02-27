@@ -7,14 +7,6 @@
 import { mapState } from 'vuex';
   
   export default {
-    computed: {
-      ...mapState({
-        footerData: state => state.Footer
-      }),
-    },
-    created() {
-      this.$store.dispatch('fetchDataFromAPI'); // Corrected action name
-    },
     data() {
             return {
                 currYear: new Date().getFullYear()

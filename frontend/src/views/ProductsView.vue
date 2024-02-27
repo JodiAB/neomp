@@ -1,39 +1,12 @@
 <template>
   <div class="back">
     <h1 class="heading">Product Page</h1>
-    <div v-for="(product, index) in products" :key="index" class="product-card">
-      <img :src="product.image" alt="Product Image">
+    <div v-for="product in $store.state.jewellery" :key="product.jewelID" class="product-card">
       <div class="description">
-        <h3>{{ product.name }}</h3>
-        <p>Description: {{ product.description }}</p>
-        <p>Price: R{{ product.price }}</p>
-        <button @click="openModal(product)" class="button">View Details<div class="hoverEffect"><div></div></div></button>
-        <button class="button"> Get in touch <div class="hoverEffect">
-          <div>
-          </div>
-          </div></button>
-      </div>
-    </div>
-    <div v-for="(product, index) in products" :key="index" class="product-card">
-      <img :src="product.image" alt="Product Image">
-      <div class="description">
-        <h3>{{ product.name }}</h3>
-        <p>Description: {{ product.description }}</p>
-        <p>Price: R{{ product.price }}</p>
-        <button @click="openModal(product)" class="button">View Details<div class="hoverEffect"><div></div></div></button>
-        <button class="button"> Get in touch <div class="hoverEffect">
-          <div>
-          </div>
-          </div></button>
-      </div>
-    </div>
-    <div v-for="(product, index) in products" :key="index" class="product-card">
-      <img :src="product.image" alt="Product Image">
-      <div class="description">
-        <h3>{{ product.name }}</h3>
-        <p>Description: {{ product.description }}</p>
-        <p>Price: R{{ product.price }}</p>
-        <button @click="openModal(product)" class="button">View Details<div class="hoverEffect"><div></div></div></button>
+        <h3>{{ product.jewelName }}</h3>
+        <p>Price: R{{ product.jewelAmount }}</p>
+       
+        <button @click="openModal(index)" class="button">View Details<div class="hoverEffect"><div></div></div></button>
         <button class="button"> Get in touch <div class="hoverEffect">
           <div>
           </div>
@@ -41,48 +14,40 @@
       </div>
     </div>
     
-
-   <!-- Modal -->
-<div v-if="showModal" class="modal" ref="modal">
-  <div class="modal-content">
-    <span class="close" @click="closeModal">&times;</span>
-    <div class="card">
-      <div class="card__title">
-        <div class="icon">
-          <a href="#"><i class="fa fa-arrow-left"></i></a>
-        </div>
-        <h3>{{ selectedProduct.name }}</h3>
-      </div>
-      <div class="card__body">
-        <div class="half">
-          <div class="featured_text">
-            <h1>{{ selectedProduct.name }}</h1>
-            <p class="sub">Product Description</p>
-            <p class="price">$ {{ selectedProduct.price }}</p>
+    <!-- Modal -->
+    <div v-if="showModal" v-for="product in $store.state.jewellery" :key="product.jewelID" class="modal" ref="modal" >
+      <div class="modal-content product-card">
+        <span class="close" @click="closeModal">&times;</span>
+        <div class="card">
+          <div class="card__title">
+            <div class="icon">
+              <a href="#"><i class="fa fa-arrow-left"></i></a>
+            </div>
+            <h3>{{ product.jewelName }}</h3>
           </div>
-          <div class="image">
-            <img :src="selectedProduct.image" alt="Product Image">
+          <div class="card__body">
+            <div class="half">
+              <div class="featured_text">
+                <h4>{{ product.jewelName }}</h4>
+                <p class="sub">Product Description</p>
+                <p class="price">R {{ product.jewelAmount }}</p>
+              </div>
+              <div class="image">
+                <img :src="product.image" alt="Product Image">
+              </div>
+            </div>
+            <div class="half">
+              <div class="description">
+                <p>{{ product.jewelAmount }}</p>
+              </div>
+              <span class="stock"><i class="fa fa-pen"></i> In stock</span>
+              <!-- For simplicity, we're not including the reviews section in the modal -->
+            </div>
           </div>
-        </div>
-        <div class="half">
-          <div class="description">
-            <p>{{ selectedProduct.description }}</p>
-          </div>
-          <span class="stock"><i class="fa fa-pen"></i> In stock</span>
-          <!-- For simplicity, we're not including the reviews section in the modal -->
-        </div>
-      </div>
-      <div class="card__footer">
-        <div class="recommend">
-          <!-- We don't have a recommended by field in the selected product -->
-        </div>
-        <div class="action">
-          <!-- You can add an action button here if needed -->
+     
         </div>
       </div>
     </div>
-  </div>
-</div>
   </div>
 </template>
 
@@ -91,14 +56,15 @@ export default {
   data() {
     return {
       showModal: false,
-      selectedProduct: {},
-      products: [
-        { id: 1, name: 'Silver Necklace', description: 'Beautiful silver necklace with pendant.', price: 50, rating: 4, image: 'https://via.placeholder.com/150' },
-        { id: 2, name: 'Leather Bracelet', description: 'Stylish leather bracelet for men.', price: 30, rating: 3, image: 'https://via.placeholder.com/150' },
-        { id: 3, name: 'Gold Ring', description: 'Elegant gold ring for special occasions.', price: 40, rating: 5, image: 'https://via.placeholder.com/150' },
-        // Add more products as needed
-      ]
+      selectedProduct: {}
+
     };
+  },
+  computed: {
+    products() {
+      return this.$store.dispatch('fetchJewellery');
+    },
+   
   },
   methods: {
     openModal(product) {
@@ -109,7 +75,19 @@ export default {
     closeModal() {
       this.showModal = false;
       document.body.classList.remove('modal-open');
+    },
+    async fetchData() {
+      try {
+        await this.$store.dispatch('fetchJewellery');
+      } catch (error) {
+        console.error('Error fetching jewellery:', error);
+      }
     }
+   
+  },
+  created() {
+    this.fetchData();
+  
   }
 }
 </script>
@@ -136,10 +114,11 @@ export default {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   width: 100%;
-  height: 155vh;
+  height: 600vh;
   background: linear-gradient(-50deg, rgb(244, 238, 129), #060606, rgb(7, 7, 7), #9f9da0);
   background-size: 200% 200%; /* Increase the size to cover the entire animation */
   animation: fire 7s ease infinite;
+  z-index: -1;
 }
 
 @keyframes fire {
@@ -157,10 +136,11 @@ export default {
   display: inline-block;
   width: calc(33.33% - 20px);
   margin: 10px;
+  height: 211px;
   vertical-align: top;
   position: relative; /* Required for absolute positioning of pseudo-elements */
-  background: linear-gradient(0deg, rgb(243, 240, 241) 0%, rgb(241, 225, 47) 49%, rgb(19, 19, 19) 100%);
-
+  background: aliceblue;
+  z-index: 1;
 }
 
 .product-card::before,
@@ -171,7 +151,7 @@ export default {
   left: -5px;
   width: calc(100% + 10px);
   height: calc(100% + 10px);
-  border: 4px solid #9e9e0f; /* Neon green color */
+  border: 4px solid #ede218; /* Neon green color */
   border-radius: 5px;
   z-index: -1;
   animation: neon-border 1.5s infinite alternate; /* Neon animation */
@@ -219,7 +199,7 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 1;
+  z-index: 1000;
 }
 
 .hoverEffect div {
@@ -292,5 +272,36 @@ export default {
 
 .modal-open .modal {
   display: block;
+}
+
+
+@media only screen and (max-width: 300px) {
+  .heading {
+    font-size: 30px; /* Adjust heading font size for smaller screens */
+  }
+
+  .back {
+    height: auto; /* Allow background height to adjust based on content */
+  }
+
+  .product-card {
+    width: 100%; /* Adjust product card width to fit the full screen */
+    margin: 10px 0; /* Adjust margin for better spacing */
+    height: auto; /* Allow product card height to adjust based on content */
+  }
+
+  .product-card::before,
+  .product-card::after {
+    display: none; /* Hide neon border on smaller screens */
+  }
+
+  .button {
+    width: 100%; /* Adjust button width to fit the full screen */
+  }
+
+  .modal-content {
+    width: 90%; /* Adjust modal content width for better fit on smaller screens */
+    margin: 10% auto; /* Adjust margin for better centering on smaller screens */
+  }
 }
 </style>

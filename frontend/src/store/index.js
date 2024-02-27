@@ -1,10 +1,13 @@
 import { createStore } from 'vuex'
 import axios from 'axios'
 const baseUrl = 'https://node-project-vuyx.onrender.com/'
+
+
+
 export default createStore({
   state: {
-    jewellery: [],
-    users: []
+    jewellery: null,
+    users: null
   },
   getters: {
     jewellery: state => state.jewellery,
@@ -21,11 +24,18 @@ export default createStore({
   },
   actions: {
     async fetchJewellery({commit}){
-      const jewelleryResponse = await axios.get(baseUrl)
-      console.log(jewelleryResponse);
-      commit('setJewellery', jewelleryResponse.data)
-      return jewelleryResponse
+      const res = await axios.get(`${baseUrl}jewellery`)
+      console.log(res.data.results);
+      commit('setJewellery', res.data.results)
+      return res
+    },
+    async fetchUsers({commit}){
+      const res = await axios.get(`${baseUrl}users`)
+      console.log(res.data.results);
+      commit('setUsers', res.data.results)
+      return res
     }
+
   },
   modules: {
   }

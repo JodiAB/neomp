@@ -827,12 +827,84 @@ transform: translateY(-50%) translateX(0px)  scale(1);
 }
 
 .food:hover .icon i {
-  background: linear-gradient(90deg, #FF7E7E, #FF4848);
+  background: gold;
   -webkit-background-clip: text;
  -webkit-text-fill-color: transparent;
   opacity: 1;
   transition: all 0.3s ease;
 }
 
-  
+/* Existing styles */
+
+@media only screen and (max-width: 300px) {
+  /* Adjust styles for heading */
+  .heading {
+    font-size: 40px;
+    margin-bottom: 0.5rem; /* Adjust margin for smaller screens */
+  }
+
+  /* Adjust styles for sub-heading */
+  .sub-heading {
+    font-size: 1em;
+    line-height: 130%;
+    margin-bottom: 0.5rem; /* Adjust margin for smaller screens */
+  }
+
+  /* Adjust styles for container */
+  .container {
+    max-width: 90%; /* Adjust max width for smaller screens */
+    margin: 0 auto; /* Center container horizontally */
+  }
+
+  /* Adjust styles for card */
+  .card {
+    width: 90%; /* Adjust card width for smaller screens */
+    max-width: none; /* Remove maximum width constraint */
+    height: auto; /* Allow cards to adjust height based on content */
+    margin: 1rem auto; /* Center cards horizontally and add spacing between them */
+  }
+
+  /* Adjust styles for icon within card */
+  .food .icon {
+    height: 60px; /* Adjust icon height for smaller screens */
+    max-width: 60px; /* Adjust icon width for smaller screens */
+  }
+
+  /* Adjust styles for title within card */
+  .food .title {
+    margin-top: 20px; /* Adjust spacing above the title for smaller screens */
+  }
+
+  /* Adjust styles for text within card */
+  .food .text {
+    margin-top: 10px; /* Adjust spacing above the text for smaller screens */
+    font-size: 12px; /* Adjust font size for smaller screens */
+    max-height: none; /* Allow text to expand beyond initial height */
+    opacity: 1; /* Ensure text is visible by default */
+  }
+
+  /* Add other component adjustments as needed */
+
+.centerflipcards {
+  width: 100%; /* Adjust width to occupy full width */
+  margin-left: 0; /* Remove left margin */
+  margin-right: 0; /* Remove right margin */
+}
+.content {
+  padding-top: 100px; /* Increase top padding for better spacing */
+  flex-direction: column; /* Change flex direction to stack elements vertically */
+}
+.body {
+  background: linear-gradient(-50deg, rgb(244, 238, 129), #060606, rgb(7, 7, 7), #9f9da0);
+  height: 424vh;/* Allow body height to adjust based on content */
+ 
+}
+.square-flip {
+  width: 250px;
+  height: 400px;
+}
+.food{
+  width: 80%;
+}
+}
 </style>

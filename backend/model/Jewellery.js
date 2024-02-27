@@ -1,4 +1,12 @@
 import { connection as db } from "../config/index.js";
+import mysql from 'mysql2'
+const pool = mysql.createPool({
+  host: process.env.MYSQL_ADDON_HOST,
+  database: process.env.MYSQL_ADDON_DB,
+  user: process.env.MYSQL_ADDON_USER,
+  password: process.env.MYSQL_ADDON_PASSWORD,
+  PORT: process.env.MYSQL_ADDON_PORT,
+}).promise();
 class Jewellery {
   fetchJewellery(req, res) {
     const qry = `

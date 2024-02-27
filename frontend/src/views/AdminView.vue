@@ -1,5 +1,6 @@
 <template>
     <div>
+      <h1>Product list</h1>
       <table>
         <thead>
           <tr>
@@ -12,12 +13,50 @@
           </tr>
         </thead>
         <tbody>
-          <tr v-for="(product, index) in products" :key="index">
-            <td>{{ product.id }}</td>
-            <td>{{ product.name }}</td>
-            <td>{{ product.description }}</td>
-            <td>${{ product.price }}</td>
+          <tr v-for="product in $store.state.jewellery" :key="product.jewelID">
+            <td>{{ product.jewelID }}</td>
+            <td>{{ product.jewelName }}</td>
+            <td>{{ product.jewelCategory }}</td>
+            <td>R {{ product.jewelAmount }}</td>
             <td><img :src="product.image" alt="Product Image" style="width: 100px; height: auto;"></td>
+            <td>
+              <button @click="openModal('edit', product.jewelID)">Edit</button>
+              <button @click="openModal('delete', product)">Delete</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <button @click="openModal('add', product)">Add Product</button>
+
+
+      <h1>User Table</h1>
+      <table>
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Last Name</th>
+            <th>Age</th>
+            <th>Gender</th>
+            <th>Email</th>
+            <th>Gender</th>
+            <th>Role</th>
+            <th>Password</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-for="people in $store.state.users" :key="people.userID">
+            <td>{{ people.userID }}</td>
+            <td>{{ people.firstName }}</td>
+            <td>{{ people.lastName }}</td>
+            <td>{{ people.userAge }}</td>
+            <td>{{ people.gender }}</td>
+            <td>{{ people.emailAdd }}</td>
+            <td>{{ people.gender }}</td>
+            <td>{{ people.userRole }}</td>
+            <td>{{ people.userPwd }}</td>
+  
             <td>
               <button @click="openModal('edit', product)">Edit</button>
               <button @click="openModal('delete', product)">Delete</button>
@@ -88,12 +127,8 @@
         selectedProduct: {},
         newProduct: { name: '', description: '', price: 0, image: null },
         editedProduct: { name: '', description: '', price: 0, image: null },
-        products: [
-          { id: 1, name: 'Silver Necklace', description: 'Beautiful silver necklace with pendant.', price: 50, rating: 4, image: 'https://via.placeholder.com/150' },
-          { id: 2, name: 'Leather Bracelet', description: 'Stylish leather bracelet for men.', price: 30, rating: 3, image: 'https://via.placeholder.com/150' },
-          { id: 3, name: 'Gold Ring', description: 'Elegant gold ring for special occasions.', price: 40, rating: 5, image: 'https://via.placeholder.com/150' },
-          // Add more products as needed
-        ]
+        products: {},
+        people: {}
       };
     },
     methods: {
@@ -142,8 +177,34 @@
     onEditImageChange(event) {
       const file = event.target.files[0];
       this.editedProduct.image = URL.createObjectURL(file);
+    },
+    async fetchData() {
+      try {
+        await this.$store.dispatch('fetchJewellery', );
+      } catch (error) {
+        console.error('Error fetching jewellery:', error);
+      }
+    },
+    async fetchInfo() {
+      try {
+        await this.$store.dispatch('fetchUsers');
+      } catch (error) {
+        console.error('Error fetching Users:', error);
+      }
     }
+    },
+    created() {
+    this.fetchData();
+    this.fetchInfo();
+  },
+  computed: {
+    products() {
+      return this.$store.dispatch('fetchJewellery');
+    },
+    people(){
+      return this.$store.dispatch('fetchUsers');
     }
+  }
   }
   </script>
   
@@ -236,4 +297,31 @@ button {
 .modal-open .modal {
   display: block;
 }
+
+@media only screen and (max-width: 400px) {
+  /* Table Styling */
+  table {
+    width: 100%;
+    margin-bottom: 15px; /* Adjust margin for better spacing */
+  }
+  
+  th, td {
+    padding: 10px; /* Adjust padding for better spacing */
+    font-size: 14px; /* Adjust font size for smaller screens */
+  }
+
+  /* Button Styling */
+  button {
+    padding: 8px 12px; /* Adjust padding for better spacing */
+    font-size: 14px; /* Adjust font size for smaller screens */
+  }
+
+  /* Modal Styling */
+  .modal-content {
+    width: 90%; /* Adjust modal content width for better fit on smaller screens */
+    margin: 15% auto; /* Adjust margin for better centering on smaller screens */
+  }
+}
+
+
 </style>
