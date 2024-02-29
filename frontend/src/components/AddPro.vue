@@ -22,7 +22,7 @@
         <input type="file" id="image" @change="onImageChange" accept="image/*" />
       </div>
       <div>
-        <button @click="addJewellery">Add Jewellery</button>
+        <button @click="addJewel">Add Jewellery</button>
       </div>
   
       <!-- Add Jewellery Modal -->
@@ -47,14 +47,20 @@
       };
     },
     methods: {
-      addJewellery() {
-        // Handle adding jewellery functionality here
-        // You can send the data to the server or perform any other actions
+        async addJewel() {
+      try {
+        // Dispatch the addJewellery action with the jewel data
+        await this.$store.dispatch('addJewel', this.jewel);
         // Reset the form after adding jewellery
         this.jewel = { name: '', description: '', category: '', price: '', image: null };
-        // Close the modal
-        this.closeModal('addModal');
-      },
+        console.log('Jewellery added successfully');
+      } catch (error) {
+        console.error('Error adding jewellery:', error);
+        // Handle error as needed
+      }
+    },
+    // Other methods for handling image change, modal open/close, etc.
+  
       onImageChange(event) {
         // Handle image change functionality here
         // Update the image in the data

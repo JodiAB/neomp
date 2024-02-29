@@ -1,16 +1,8 @@
 import { connection as db } from "../config/index.js";
-import mysql from 'mysql2'
-const pool = mysql.createPool({
-  host: process.env.MYSQL_ADDON_HOST,
-  database: process.env.MYSQL_ADDON_DB,
-  user: process.env.MYSQL_ADDON_USER,
-  password: process.env.MYSQL_ADDON_PASSWORD,
-  PORT: process.env.MYSQL_ADDON_PORT,
-}).promise();
 class Jewellery {
   fetchJewellery(req, res) {
     const qry = `
-        SELECT jewelID, jewelName, jewelQuantity,
+        SELECT jewelID, jewelCategory, jewelDescription, jewelImage, jewelName, jewelQuantity,
         jewelAmount, userID
         FROM Jewellery;
         `;
@@ -24,7 +16,7 @@ class Jewellery {
   }
   fetchJewel(req, res) {
     const qry = `
-        SELECT jewelID, jewelleryCategory, jewelName, jewelQuantity,
+        select jewelID, jewelCategory, jewelDescription, jewelImage, jewelName, jewelQuantity,
         jewelAmount, userID
         FROM Jewellery
         WHERE jewelID = ${req.params.id};
@@ -33,24 +25,50 @@ class Jewellery {
       if (err) throw err;
       res.json({
         status: res.statusCode,
-        result: result[0]
+        result
       });
     });
   }
-  addJewel = async (name, description, category, price, image) => {
-    const [result] = await pool.query('INSERT INTO Jewellery (name, description, category, price, image) VALUES (?, ?, ?, ?, ?)', [name, description, category, price, image]);
-    return getJewel(result.insertId);
-};
-
- updateJewel = async (id, name, description, category, price, image) => {
-    await pool.query('UPDATE Jewellery SET name = ?, description = ?, category = ?, price = ?, image = ? WHERE id = ?', [name, description, category, price, image. id]);
-    return getJewel(id);
-};
-
- deleteJewel = async (id) => {
-    await pool.query('DELETE FROM Jewellery WHERE id = ?', [id]);
-    return getAllJewellery();
-};
+  addJewel(req, res) {
+    const qry = `
+        insert into Jewellery
+        set ?;
+        `;
+    db.query(qry, [req.body], (err) => {
+      if (err) throw err;
+      res.json({
+        status: res.statusCode,
+        msg: "New Jewellery has been added.",
+      });
+    });
+  }
+  deleteJewel(req, res) {
+    const qry = `
+        delete from Jewellery
+        where jewelID = ${req.params.id}
+        `;
+    db.query(qry, [req.body], (err) => {
+      if (err) throw err;
+      res.json({
+        status: res.statusCode,
+        msg: "Jewellery item has been removed.",
+      });
+    });
+  }
+  updateJewel(req, res) {
+    const qry = `
+        update Jewellery
+        SET ?
+        WHERE jewelID = ${req.params.id}
+        `;
+    db.query(qry, [req.body], (err) => {
+      if (err) throw err;
+      res.json({
+        status: res.statusCode,
+        msg: "Jewellery has been updated.",
+      });
+    });
+  }
 }
 
 export { Jewellery };

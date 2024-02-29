@@ -34,9 +34,45 @@ export default createStore({
       console.log(res.data.results);
       commit('setUsers', res.data.results)
       return res
-    }
-
+    },
+     
+    async addJewel(jewelData) {
+      try {
+        const response = await axios.post(`https://node-project-1-qhgf.onrender.com/jewellery/addJewel`, jewelData);
+        // Handle response data as needed
+        console.log(response.data);
+      } catch (error) {
+        console.error('Error adding jewellery item:', error);
+      }
+    },
+    
+    async updateJewel(jewelData) {
+      try {
+        const response = await axios.patch(`https://node-project-1-qhgf.onrender.com/jewellery/updateJewel/${id}`, jewelData);
+        // Handle response data as needed
+        console.log(response.data);
+      } catch (error) {
+        console.error('Error updating jewellery item:', error);
+      }
+    },
+    
+    // async deleteJewel({commit},id) {
+    //   try {
+    //     const response = await axios.delete(`https://node-project-1-qhgf.onrender.com/deleteJewel/${id}`);
+    //     // Handle response data as needed
+    //     console.log(response.data);
+    //   } catch (error) {
+    //     console.error('Error deleting jewellery item:', error);
+    //   }
+    // }
+    async deleteJewel({commit},id){
+      await axios.delete(baseUrl+ '/Jewellery/deleteJewel/' +id);
+      window.location.reload();
+    },
   },
+  
+
+  
   modules: {
   }
 })

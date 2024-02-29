@@ -44,7 +44,7 @@
             <th>Email</th>
             <th>Gender</th>
             <th>Role</th>
-            <th>Password</th>
+            
             <th>Action</th>
           </tr>
         </thead>
@@ -58,7 +58,7 @@
             <td>{{ people.emailAdd }}</td>
             <td>{{ people.gender }}</td>
             <td>{{ people.userRole }}</td>
-            <td>{{ people.userPwd }}</td>
+       
   
             <td>
               <button @click="openModal('edit', product)">Edit</button>
@@ -114,7 +114,7 @@
         <div class="modal-content">
           <h2>Delete Product</h2>
           <p>Are you sure you want to delete "{{ selectedProduct.name }}"?</p>
-          <button @click="deleteProduct">Confirm</button>
+          <button @click="deleteJewel">Confirm</button>
           <button @click="closeModal('deleteModal')">Cancel</button>
         </div>
       </div>
@@ -158,33 +158,27 @@
         document.body.classList.remove('modal-open');
       },
      // Add a new jewellery item
-     async addJewel(jewelData) {
-      try {
-        const response = await axios.post('https://node-project-1-qhgf.onrender.com/', jewelData);
-        // Handle response data as needed
-        console.log(response.data);
+  async addJewel(){
+    try {
+        await this.$store.dispatch('addJewel', );
       } catch (error) {
-        console.error('Error adding jewellery item:', error);
+        console.error('Error adding jewellery:', error);
       }
-    },
+  },
     // Delete a jewellery item by ID
-    async deleteJewel(id) {
-      try {
-        const response = await axios.delete(`https://node-project-1-qhgf.onrender.com/${id}`);
-        // Handle response data as needed
-        console.log(response.data);
+   async deleteJewel(){
+    try {
+        await this.$store.dispatch('deleteJewel');
       } catch (error) {
-        console.error('Error deleting jewellery item:', error);
+        console.error('Error adding jewellery:', error);
       }
-    },
+   },
     // Update a jewellery item
-    async updateJewel(jewelData) {
+    async updateJewel(){
       try {
-        const response = await axios.put('/api/jewellery', jewelData);
-        // Handle response data as needed
-        console.log(response.data);
+        await this.$store.dispatch('updateJewel', );
       } catch (error) {
-        console.error('Error updating jewellery item:', error);
+        console.error('Error adding jewellery:', error);
       }
     },
       onImageChange(event) {
