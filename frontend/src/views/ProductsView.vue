@@ -1,9 +1,30 @@
 <template>
   <div class="back">
     <h1 class="heading">Product Page</h1>
+
+    
+   
+   <!-- Filter and Search Controls -->
+   <div class="filter-search">
+    <!-- Filter by Category -->
+    <select v-model="selectedCategory">
+      <option value="">All Categories</option>
+      <option v-for="category in uniqueCategories" :key="category" :value="category">{{ category }}</option>
+    </select>
+
+    <!-- Filter by Price Range -->
+    <input type="number" placeholder="Min Price" v-model="minPrice">
+    <input type="number" placeholder="Max Price" v-model="maxPrice">
+
+    <!-- Search Input -->
+    <input type="text" placeholder="Search..." v-model="searchQuery">
+  </div>
+
+
     <div v-for="product in $store.state.jewellery" :key="product.jewelID" class="product-card">
       <div class="description">
         <h3>{{ product.jewelName }}</h3>
+        <img :src="product.jewelImage" alt="Product Image" style="width: 100px; height: auto;">
         <p>Price: R{{ product.jewelAmount }}</p>
        
         <button @click="openModal(index)" class="button">View Details<div class="hoverEffect"><div></div></div></button>
@@ -13,9 +34,12 @@
           </div></button>
       </div>
     </div>
+
+    <Modal :show-modal="showModal" :product-data="selectedProduct" @close="showModal = false" />
     
     <!-- Modal -->
-    <div v-if="showModal" v-for="product in $store.state.jewellery" :key="product.jewelID" class="modal" ref="modal" >
+    <!-- <div v-if="showModal">
+      <div v-for="product in $store.state.jewellery" :key="product.jewelID" class="modal" ref="modal" >
       <div class="modal-content product-card">
         <span class="close" @click="closeModal">&times;</span>
         <div class="card">
@@ -23,17 +47,17 @@
             <div class="icon">
               <a href="#"><i class="fa fa-arrow-left"></i></a>
             </div>
-            <h3>{{ product.jewelName }}</h3>
+            <h3 >{{ product.jewelName }}</h3>
           </div>
           <div class="card__body">
             <div class="half">
               <div class="featured_text">
-                <h4>{{ product.jewelName }}</h4>
+             
                 <p class="sub">Product Description</p>
                 <p class="price">R {{ product.jewelAmount }}</p>
               </div>
               <div class="image">
-                <img :src="product.image" alt="Product Image">
+                <img :src="product.jewelImage" alt="Product Image">
               </div>
             </div>
             <div class="half">
@@ -41,20 +65,31 @@
                 <p>{{ product.jewelAmount }}</p>
               </div>
               <span class="stock"><i class="fa fa-pen"></i> In stock</span>
-              <!-- For simplicity, we're not including the reviews section in the modal -->
+              
             </div>
           </div>
      
         </div>
       </div>
     </div>
-  </div>
+    </div> -->
+</div>
+
 </template>
 
 <script>
+
+// import Modal from '../components/Modal.vue'
 export default {
+  // components:{
+  //   Modal
+  // },
   data() {
     return {
+      selectedCategory: "",
+      minPrice: null,
+      maxPrice: null,
+      searchQuery: "",
       showModal: false,
       selectedProduct: {}
 
@@ -64,6 +99,15 @@ export default {
     products() {
       return this.$store.dispatch('fetchJewellery');
     },
+    uniqueCategories() {
+    const categories = new Set();
+    if (this.$store.state.jewellery) {
+        this.$store.state.jewellery.forEach(product => {
+            categories.add(product.jewelCategory);
+        });
+    }
+    return Array.from(categories);
+}
    
   },
   methods: {
@@ -135,8 +179,8 @@ export default {
 .product-card {
   display: inline-block;
   width: calc(33.33% - 20px);
-  margin: 10px;
-  height: 211px;
+  margin: 33px;
+  height: 258px;
   vertical-align: top;
   position: relative; /* Required for absolute positioning of pseudo-elements */
   background: aliceblue;
@@ -149,8 +193,8 @@ export default {
   position: absolute;
   top: -5px;
   left: -5px;
-  width: calc(100% + 10px);
-  height: calc(100% + 10px);
+  width: calc(100% + 0px);
+  height: calc(100% + 0px);
   border: 4px solid #ede218; /* Neon green color */
   border-radius: 5px;
   z-index: -1;
@@ -231,7 +275,9 @@ export default {
 }
 
 .modal {
-  display: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   position: fixed;
   z-index: 1;
   left: 0;
@@ -244,26 +290,74 @@ export default {
 
 .modal-content {
   background-color: #fefefe;
-  margin: 10% auto;
   padding: 20px;
-  border: 1px solid #888;
-  width: 80%;
   border-radius: 5px;
+  max-width: 600px; /* Adjust the maximum width as needed */
+  width: 80%;
 }
 
 .close {
-  color: #aaa;
-  float: right;
+  position: absolute;
+  top: 10px;
+  right: 10px;
   font-size: 28px;
-  font-weight: bold;
-}
-
-.close:hover,
-.close:focus {
-  color: black;
-  text-decoration: none;
+  color: #aaa;
   cursor: pointer;
 }
+
+.close:hover {
+  color: black;
+}
+
+.card {
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 20px;
+  background-color: white;
+}
+
+.card__title {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.card__title .icon {
+  margin-right: 10px;
+}
+
+.card__title h3 {
+  margin: 0;
+}
+
+.card__body {
+  display: flex;
+}
+
+.half {
+  flex: 1;
+  padding: 0 10px;
+}
+
+.image img {
+  max-width: 100%;
+  height: auto;
+}
+
+.description p {
+  margin-bottom: 10px;
+}
+
+.stock {
+  display: block;
+  margin-top: 10px;
+  color: #666;
+}
+
+.fa {
+  color: #666;
+}
+
 
 /* Show modal */
 .modal-open {

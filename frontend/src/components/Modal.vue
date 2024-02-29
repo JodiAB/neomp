@@ -1,125 +1,181 @@
 <template>
-  <div class="modal-page-mask" v-if="showModal">
-    <div class="modal-page-content">
-      <div class="modal-page-header">
-        <span class="modal-page-title">Update Information</span>
-        
-        <button class="modal-page-close" @click="closeModal">X</button>
-      </div>
-      <fieldset>
-        <input name="text" placeholder="id" type="text" tabindex="1" required autofocus>
-      </fieldset>
-      <fieldset>
-        <input name="text" placeholder="Product name" type="text" tabindex="2" required autofocus>
-      </fieldset>
-      <fieldset>
-        <input name="text" placeholder="Description" type="text" tabindex="3" required autofocus>
-      </fieldset>
-      <fieldset>
-        <input name="number" placeholder="Price" type="text" tabindex="4" required autofocus>
-      </fieldset>
-      <fieldset>
-        <input name="text" placeholder="Image" type="text" tabindex="5" required autofocus>
-      </fieldset>
-
-      <div class="modal-page-body">
-        <p></p>
-        <button @click="update">Update</button>
-        <button @click="del">Delete</button>
+  <div v-if="showModal" class="modal">
+    <div v-for="product in $store.state.jewellery" :key="product.jewelID" class="modal" ref="modal" >
+    <div class="modal-content product-card" ref="modal">
+      <span class="close" @click="closeModal">&times;</span>
+      <div class="card">
+        <div class="card__title">
+          <div class="icon">
+            <a href="#"><i class="fa fa-arrow-left"></i></a>
+          </div>
+          <h3>{{ productData.jewelName }}</h3>
+        </div>
+        <div class="card__body">
+          <div class="half">
+            <div class="featured_text">
+              <p class="sub">Product Description</p>
+              <p class="price">R {{ productData.jewelAmount }}</p>
+            </div>
+            <div class="image">
+              <img :src="productData.jewelImage" alt="Product Image">
+            </div>
+          </div>
+          <div class="half">
+            <div class="description">
+              <p>{{ productData.jewelAmount }}</p>
+            </div>
+            <span class="stock"><i class="fa fa-pen"></i> In stock</span>
+          </div>
+        </div>
       </div>
     </div>
   </div>
+</div>
 </template>
+
 
 <script>
 export default {
   props: {
-    showModal: {
-      type: Boolean,
-      default: false
+    showModal: Boolean,
+    productData: Object,
+  },
+  data() {
+    return {
+      selectedCategory: "",
+      minPrice: null,
+      maxPrice: null,
+      searchQuery: "",
+      showModal: false,
+      selectedProduct: {}
+
+    };
+  },
+  computed: {
+    products() {
+      return this.$store.dispatch('fetchJewellery');
     },
-    modalText: String
+   
   },
   methods: {
+    openModal(product) {
+      this.selectedProduct = product;
+      this.showModal = true;
+      document.body.classList.add('modal-open');
+    },
     closeModal() {
-      this.$emit('close');
+      this.showModal = false;
+      document.body.classList.remove('modal-open');
     },
-    update() {
-      // Add your update logic here
-      console.log('Update clicked');
-      // Close the modal page after update
-      this.closeModal();
-    },
-    add() {
-      // Add your update logic here
-      console.log('Add clicked');
-      // Close the modal page after update
-      this.closeModal();
-    },
-    del() {
-      // Add your update logic here
-      console.log('delete clicked');
-      // Close the modal page after update
-      this.closeModal();
-    },
+    async fetchData() {
+      try {
+        await this.$store.dispatch('fetchJewellery');
+      } catch (error) {
+        console.error('Error fetching jewellery:', error);
+      }
+    }
+   
+  },
+  created() {
+    this.fetchData();
+  
   }
-}
+};
 </script>
 
 <style scoped>
-.modal-page-mask {
+.modal {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   position: fixed;
-  top: 0;
+  z-index: 1;
   left: 0;
+  top: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.4);
 }
 
-.modal-page-content {
-  background-color: #fff;
-  border-radius: 5px;
+.modal-content {
+  background-color: #fefefe;
   padding: 20px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  border-radius: 5px;
+  max-width: 600px; /* Adjust the maximum width as needed */
+  width: 80%;
 }
 
-.modal-page-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 20px;
-}
-
-.modal-page-title {
-  font-size: 18px;
-}
-
-.modal-page-close {
-  border: none;
-  background-color: transparent;
+.close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 28px;
+  color: #aaa;
   cursor: pointer;
-  font-size: 15px;
+}
+
+.close:hover {
   color: black;
 }
 
-.modal-page-body {
-  text-align: center;
+.card {
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 20px;
+  background-color: white;
 }
 
-.modal-page-body p {
+.card__title {
+  display: flex;
+  align-items: center;
   margin-bottom: 20px;
 }
 
-button {
-  padding: 10px 20px;
-  background-color: #007bff;
-  color: #fff;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-
+.card__title .icon {
+  margin-right: 10px;
 }
+
+.card__title h3 {
+  margin: 0;
+}
+
+.card__body {
+  display: flex;
+}
+
+.half {
+  flex: 1;
+  padding: 0 10px;
+}
+
+.image img {
+  max-width: 100%;
+  height: auto;
+}
+
+.description p {
+  margin-bottom: 10px;
+}
+
+.stock {
+  display: block;
+  margin-top: 10px;
+  color: #666;
+}
+
+.fa {
+  color: #666;
+}
+
+
+/* Show modal */
+.modal-open {
+  overflow: hidden;
+}
+
+.modal-open .modal {
+  display: block;
+}
+
 </style>

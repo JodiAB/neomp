@@ -766,21 +766,17 @@ transform: translateY(-50%) translateX(0px)  scale(1);
   width: 100%;
   height: 80px;
   max-width:80px;
-  background: linear-gradient(90deg, #FF7E7E 0%, #FF4848 40%, rgba(0, 0, 0, 0.28) 60%);
+  background: linear-gradient(90deg, #f6ff7e 0%, #c5ff48 40%, rgba(0, 0, 0, 0.28) 60%);
   border-radius: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
-  color: white;
+  color: rgb(8, 8, 8);
   transition: all 0.8s ease;
   background-position: 0px;
   background-size: 200px;
 }
 
-.material-icons.md-18 { font-size: 18px; }
-.material-icons.md-24 { font-size: 24px; }
-.material-icons.md-36 { font-size: 36px; }
-.material-icons.md-48 { font-size: 48px; }
 
 .food .title {
   width: 100%;

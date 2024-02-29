@@ -1,6 +1,6 @@
 import { createStore } from 'vuex'
 import axios from 'axios'
-const baseUrl = 'https://node-project-vuyx.onrender.com/'
+const baseUrl = 'https://node-project-1-qhgf.onrender.com/'
 
 
 

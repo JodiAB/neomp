@@ -37,46 +37,20 @@ class Jewellery {
       });
     });
   }
-  addJewel(req, res) {
-    const qry = `
-        INSERT INTO Jewellery
-        SET ?;
-        `;
-    db.query(qry, [req.body], (err) => {
-      if (err) throw err;
-      res.json({
-        status: res.statusCode,
-        msg: "New Jewellery has been added.",
-      });
-    });
-  }
-  deleteJewel(req, res) {
-    const qry = `
-        DELETE Jewellery
-        SET ?;
-        `;
-    db.query(qry, [req.body], (err) => {
-      if (err) throw err;
-      res.json({
-        status: res.statusCode,
-        msg: "Jewellery item has been removed.",
-      });
-    });
-  }
-  updateJewel(req, res) {
-    const qry = `
-        UPDATE Jewellery,
-        WHERE 
-        SET ?;
-        `;
-    db.query(qry, [req.body], (err) => {
-      if (err) throw err;
-      res.json({
-        status: res.statusCode,
-        msg: "Jewellery has been updated.",
-      });
-    });
-  }
+  addJewel = async (name, description, category, price, image) => {
+    const [result] = await pool.query('INSERT INTO Jewellery (name, description, category, price, image) VALUES (?, ?, ?, ?, ?)', [name, description, category, price, image]);
+    return getJewel(result.insertId);
+};
+
+ updateJewel = async (id, name, description, category, price, image) => {
+    await pool.query('UPDATE Jewellery SET name = ?, description = ?, category = ?, price = ?, image = ? WHERE id = ?', [name, description, category, price, image. id]);
+    return getJewel(id);
+};
+
+ deleteJewel = async (id) => {
+    await pool.query('DELETE FROM Jewellery WHERE id = ?', [id]);
+    return getAllJewellery();
+};
 }
 
 export { Jewellery };

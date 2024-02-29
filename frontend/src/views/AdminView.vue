@@ -5,6 +5,7 @@
         <thead>
           <tr>
             <th>ID</th>
+            <th>Category</th>
             <th>Name</th>
             <th>Description</th>
             <th>Price</th>
@@ -15,10 +16,12 @@
         <tbody>
           <tr v-for="product in $store.state.jewellery" :key="product.jewelID">
             <td>{{ product.jewelID }}</td>
-            <td>{{ product.jewelName }}</td>
             <td>{{ product.jewelCategory }}</td>
+            <td>{{ product.jewelName }}</td>
+            <td>{{ product.jewelDescription }}</td>
             <td>R {{ product.jewelAmount }}</td>
-            <td><img :src="product.image" alt="Product Image" style="width: 100px; height: auto;"></td>
+            
+            <td><img :src="product.jewelImage" alt="Product Image" style="width: 100px; height: auto;"></td>
             <td>
               <button @click="openModal('edit', product.jewelID)">Edit</button>
               <button @click="openModal('delete', product)">Delete</button>
@@ -64,10 +67,11 @@
           </tr>
         </tbody>
       </table>
-      <button @click="openModal('add', product)">Add Product</button>
+      <button  @click="AddPro()">Add Product</button>
   
       <!-- Add Product Modal -->
-      <div v-if="addModal" class="modal" ref="addModal">
+      <AddPro/>
+      <!-- <div v-if="addModal" class="modal" ref="addModal">
         <div class="modal-content">
           <span class="close" @click="closeModal('addModal')">&times;</span>
           <h2>Add Product</h2>
@@ -80,10 +84,10 @@
             <input type="number" id="productPrice" v-model="newProduct.price" required>
             <label for="productImage">Image:</label>
           <input type="file" id="productImage" @change="onImageChange" accept="image/*" required>
-            <button type="submit">Add Product</button>
+            <button type="submit" @click="addJewel">Add Product</button>
           </form>
         </div>
-      </div>
+      </div> -->
   
       <!-- Edit Product Modal -->
       <div v-if="editModal" class="modal" ref="editModal">
@@ -100,7 +104,7 @@
             <label for="editProductImage">Image:</label>
           <input type="file" id="editProductImage" @change="onEditImageChange" accept="image/*" required>
           <button type="submit">Save Changes</button>
-            <button type="submit">Save Changes</button>
+            
           </form>
         </div>
       </div>
@@ -118,7 +122,12 @@
   </template>
   
   <script>
+  import axios from 'axios';
+  import AddPro from '../components/AddPro.vue';
   export default {
+    components:{
+      AddPro
+    },
     data() {
       return {
         addModal: false,
@@ -148,28 +157,36 @@
         this[modalName] = false;
         document.body.classList.remove('modal-open');
       },
-      addProduct() {
-        // Add the new product to the products array
-        this.products.push({ ...this.newProduct, id: this.products.length + 1 });
-        this.newProduct = { name: '', description: '', price: 0, image: null }; // Reset new product data
-        this.closeModal('addModal');
-      },
-      editProduct() {
-        // Find the index of the edited product
-        const index = this.products.findIndex(product => product.id === this.editedProduct.id);
-        if (index !== -1) {
-          // Update the product with the edited data
-          this.products[index] = { ...this.editedProduct };
-          this.closeModal('editModal');
-        }
-      },
-      deleteProduct() {
-        const index = this.products.findIndex(product => product.id === this.selectedProduct.id);
-        if (index !== -1) {
-          this.products.splice(index, 1);
-          this.closeModal('deleteModal');
-        }
-      },
+     // Add a new jewellery item
+     async addJewel(jewelData) {
+      try {
+        const response = await axios.post('https://node-project-1-qhgf.onrender.com/', jewelData);
+        // Handle response data as needed
+        console.log(response.data);
+      } catch (error) {
+        console.error('Error adding jewellery item:', error);
+      }
+    },
+    // Delete a jewellery item by ID
+    async deleteJewel(id) {
+      try {
+        const response = await axios.delete(`https://node-project-1-qhgf.onrender.com/${id}`);
+        // Handle response data as needed
+        console.log(response.data);
+      } catch (error) {
+        console.error('Error deleting jewellery item:', error);
+      }
+    },
+    // Update a jewellery item
+    async updateJewel(jewelData) {
+      try {
+        const response = await axios.put('/api/jewellery', jewelData);
+        // Handle response data as needed
+        console.log(response.data);
+      } catch (error) {
+        console.error('Error updating jewellery item:', error);
+      }
+    },
       onImageChange(event) {
       const file = event.target.files[0];
       this.newProduct.image = URL.createObjectURL(file);
