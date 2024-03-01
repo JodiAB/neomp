@@ -19,7 +19,21 @@ export default createStore({
     },
     setUsers(state, data){
       state.users = data
+    },
+    deleteJewel(state, jewelID){
+      state.data = state.data.filter(
+        (jewellery) => jewelID !== jewelID
+      );
+
+    },
+editJewel(state, updateJewel){
+  state.data = state.data.map((jewellery) => {
+    if(jewellery.jewelID === updateJewel.jewelID){
     }
+    return updateJewel;
+  });
+}
+
 
   },
   actions: {
@@ -36,7 +50,7 @@ export default createStore({
       return res
     },
      
-    async addJewel(jewelData) {
+    async addJewel({commit},jewelData) {
       try {
         const response = await axios.post(`https://node-project-1-qhgf.onrender.com/jewellery/addJewel`, jewelData);
         // Handle response data as needed
@@ -56,19 +70,26 @@ export default createStore({
       }
     },
     
-    // async deleteJewel({commit},id) {
-    //   try {
-    //     const response = await axios.delete(`https://node-project-1-qhgf.onrender.com/deleteJewel/${id}`);
-    //     // Handle response data as needed
-    //     console.log(response.data);
-    //   } catch (error) {
-    //     console.error('Error deleting jewellery item:', error);
-    //   }
+    async deleteJewel({commit},id) {
+      try {
+        const response = await axios.delete(`https://node-project-1-qhgf.onrender.com/Jewellery/deleteJewel/${id}`, {
+          method: 'DELETE',
+        });
+        commit("deleteJewel", jewelID);
+        if (!response.ok) {
+          throw new Error("Failed to delete product");
+        }
+        // Handle response data as needed
+        
+      } catch (error) {
+        console.error('Error deleting jewellery item:', error);
+      }
+    }
+    // async deleteJewel(context,jewelID){
+    //   await axios.delete(`https://node-project-1-qhgf.onrender.com/Jewellery/deleteJewel/${jewelID}`);
+    //   console.log("Delete was okay");
+    //   window.location.reload();
     // }
-    async deleteJewel({commit},id){
-      await axios.delete(baseUrl+ '/Jewellery/deleteJewel/' +id);
-      window.location.reload();
-    },
   },
   
 

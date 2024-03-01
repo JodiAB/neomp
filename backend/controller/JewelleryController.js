@@ -1,8 +1,9 @@
-
 import express from 'express';
 import bodyParser from 'body-parser';
 import { jewellery } from '../model/index.js';
+
 const jewelleryRouter = express.Router();
+
 jewelleryRouter.get('/', (req, res)=>{
     try {
         jewellery.fetchJewellery(req, res);
@@ -13,6 +14,7 @@ jewelleryRouter.get('/', (req, res)=>{
         })
     }
 })
+
 jewelleryRouter.get('/:id', (req, res)=>{
     try {
         jewellery.fetchJewel(req, res);
@@ -23,6 +25,7 @@ jewelleryRouter.get('/:id', (req, res)=>{
         })
     }
 })
+
 jewelleryRouter.post('/addJewel', bodyParser.json(), (req, res)=>{
     try {
         jewellery.addJewel(req, res);
@@ -33,6 +36,7 @@ jewelleryRouter.post('/addJewel', bodyParser.json(), (req, res)=>{
         })
     }
 })
+
 jewelleryRouter.delete('/deleteJewel/:id', bodyParser.json(), (req, res)=>{
     try {
         jewellery.deleteJewel(req, res);
@@ -43,6 +47,7 @@ jewelleryRouter.delete('/deleteJewel/:id', bodyParser.json(), (req, res)=>{
         })
     }
 })
+
 jewelleryRouter.patch('/updateJewel/:id', bodyParser.json(), (req, res)=>{
     try {
         jewellery.updateJewel(req, res);
@@ -53,27 +58,7 @@ jewelleryRouter.patch('/updateJewel/:id', bodyParser.json(), (req, res)=>{
         })
     }
 })
+
 export {
     jewelleryRouter
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

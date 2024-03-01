@@ -1,6 +1,6 @@
 <template >
     <div class="footer">
-        <h2 class="foot">&copy;  <span>{{ currYear }}</span> Jodi Abrahams Portfolio. All rights reserved.</h2>
+        <h2 class="foot">&copy;  <span>{{ currYear }}</span> Titan Treasures. All rights reserved.</h2>
     </div>
 </template>
 <script>

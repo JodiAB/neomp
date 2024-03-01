@@ -40,9 +40,6 @@
           contactsData: state => state.Contact
         }),
       },
-      created() {
-        this.$store.dispatch('fetchDataFromAPI'); // Corrected action name
-      },
     }
     </script>
     <style >

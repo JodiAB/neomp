@@ -1,5 +1,7 @@
 <template>
-    <div>
+  <div>
+    <Spinner v-if="loading"/>
+    <div v-else>
       <h1>Product list</h1>
       <table>
         <thead>
@@ -24,14 +26,14 @@
             <td><img :src="product.jewelImage" alt="Product Image" style="width: 100px; height: auto;"></td>
             <td>
               <button @click="openModal('edit', product.jewelID)">Edit</button>
-              <button @click="openModal('delete', product)">Delete</button>
+              <button @click="openModal('delete', product.jewelID)">Delete</button>
             </td>
           </tr>
         </tbody>
       </table>
       <button @click="openModal('add', product)">Add Product</button>
-
-
+      
+      
       <h1>User Table</h1>
       <table>
         <thead>
@@ -58,8 +60,8 @@
             <td>{{ people.emailAdd }}</td>
             <td>{{ people.gender }}</td>
             <td>{{ people.userRole }}</td>
-       
-  
+            
+            
             <td>
               <button @click="openModal('edit', product)">Edit</button>
               <button @click="openModal('delete', product)">Delete</button>
@@ -68,7 +70,7 @@
         </tbody>
       </table>
       <button  @click="AddPro()">Add Product</button>
-  
+      
       <!-- Add Product Modal -->
       <AddPro/>
       <!-- <div v-if="addModal" class="modal" ref="addModal">
@@ -88,7 +90,7 @@
           </form>
         </div>
       </div> -->
-  
+      
       <!-- Edit Product Modal -->
       <div v-if="editModal" class="modal" ref="editModal">
         <div class="modal-content">
@@ -102,31 +104,36 @@
             <label for="editProductPrice">Price:</label>
             <input type="number" id="editProductPrice" v-model="editedProduct.price" required>
             <label for="editProductImage">Image:</label>
-          <input type="file" id="editProductImage" @change="onEditImageChange" accept="image/*" required>
-          <button type="submit">Save Changes</button>
+            <input type="file" id="editProductImage" @change="onEditImageChange" accept="image/*" required>
+            <button type="submit">Save Changes</button>
             
           </form>
         </div>
       </div>
-  
+      
       <!-- Delete Product Modal -->
       <div v-if="deleteModal" class="modal" ref="deleteModal">
         <div class="modal-content">
           <h2>Delete Product</h2>
-          <p>Are you sure you want to delete "{{ selectedProduct.name }}"?</p>
-          <button @click="deleteJewel">Confirm</button>
+          <p>Are you sure you want to delete ?</p>
+          <button @click="deleteJewel(jewelID)">Confirm</button>
+          
           <button @click="closeModal('deleteModal')">Cancel</button>
         </div>
+        
       </div>
     </div>
+  </div>
   </template>
   
   <script>
-  import axios from 'axios';
+  // import axios from 'axios';
   import AddPro from '../components/AddPro.vue';
+  import Spinner from '@/components/Spinner.vue';
   export default {
     components:{
-      AddPro
+      AddPro,
+      Spinner
     },
     data() {
       return {
@@ -137,7 +144,8 @@
         newProduct: { name: '', description: '', price: 0, image: null },
         editedProduct: { name: '', description: '', price: 0, image: null },
         products: {},
-        people: {}
+        people: {},
+        loading:true
       };
     },
     methods: {
@@ -165,18 +173,16 @@
         console.error('Error adding jewellery:', error);
       }
   },
-    // Delete a jewellery item by ID
-   async deleteJewel(){
-    try {
-        await this.$store.dispatch('deleteJewel');
-      } catch (error) {
-        console.error('Error adding jewellery:', error);
-      }
-   },
+  deleteJewel(jewelID){
+    this.$store.dispatch('deleteJewel', jewelID)
+    .then(() =>{
+      this.fetchData();
+    }); 
+  },
     // Update a jewellery item
     async updateJewel(){
       try {
-        await this.$store.dispatch('updateJewel', );
+        await this.$store.dispatch('updateJewel');
       } catch (error) {
         console.error('Error adding jewellery:', error);
       }
@@ -215,7 +221,12 @@
     people(){
       return this.$store.dispatch('fetchUsers');
     }
-  }
+  },
+  mounted() {
+    setTimeout(() => {
+      this.loading = false;
+    }, 3000);
+  },
   }
   </script>
   

@@ -3,7 +3,7 @@ import HomeView from '../views/HomeView.vue'
 import ProductsView from '@/views/ProductsView'
 import ContactView from '@/views/ContactView'
 import AdminView from '@/views/AdminView'
-import SinglePro from '@/views/SinglePro'
+
 const routes = [
   {
     path: '/',
@@ -33,11 +33,7 @@ const routes = [
     name: 'admin',
     component: AdminView
   },
-  {
-    path: '/single',
-    name: 'single',
-    component: SinglePro
-  },
+
 ]
 
 const router = createRouter({

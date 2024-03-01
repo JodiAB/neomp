@@ -1,5 +1,6 @@
 <template>
   <div>
+  
  <Navi/>
   <router-view/>
 <Footer/>
@@ -8,12 +9,12 @@
 <script>
 import Navi from '@/components/Navi.vue'; 
 import Footer from '@/components/Footer.vue';
-import Spinner from '@/components/Spinner.vue';
+
 export default {
 components: {
     Navi,
     Footer,
-    Spinner
+    
 
     
   

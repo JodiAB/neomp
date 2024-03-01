@@ -1,6 +1,5 @@
 <template>
   <div v-if="showModal" class="modal">
-    <div v-for="product in $store.state.jewellery" :key="product.jewelID" class="modal" ref="modal" >
     <div class="modal-content product-card" ref="modal">
       <span class="close" @click="closeModal">&times;</span>
       <div class="card">
@@ -14,25 +13,26 @@
           <div class="half">
             <div class="featured_text">
               <p class="sub">Product Description</p>
-              <p class="price">R {{ productData.jewelAmount }}</p>
+              <p class="price"> {{ productData.jewelDescription }}</p>
             </div>
             <div class="image">
               <img :src="productData.jewelImage" alt="Product Image">
             </div>
+            <div> 
+          
+            </div>
           </div>
           <div class="half">
             <div class="description">
-              <p>{{ productData.jewelAmount }}</p>
+              <p class="sub">Price R {{ productData.jewelAmount }}</p>
+              <!-- <p>{{ productData.jewelAmount }}</p> -->
             </div>
-            <span class="stock"><i class="fa fa-pen"></i> In stock</span>
           </div>
         </div>
       </div>
     </div>
   </div>
-</div>
 </template>
-
 
 <script>
 export default {
@@ -40,48 +40,14 @@ export default {
     showModal: Boolean,
     productData: Object,
   },
-  data() {
-    return {
-      selectedCategory: "",
-      minPrice: null,
-      maxPrice: null,
-      searchQuery: "",
-      showModal: false,
-      selectedProduct: {}
-
-    };
-  },
-  computed: {
-    products() {
-      return this.$store.dispatch('fetchJewellery');
-    },
-   
-  },
   methods: {
-    openModal(product) {
-      this.selectedProduct = product;
-      this.showModal = true;
-      document.body.classList.add('modal-open');
-    },
     closeModal() {
-      this.showModal = false;
-      document.body.classList.remove('modal-open');
+      this.$emit('close'); // Emit close event to parent component
     },
-    async fetchData() {
-      try {
-        await this.$store.dispatch('fetchJewellery');
-      } catch (error) {
-        console.error('Error fetching jewellery:', error);
-      }
-    }
-   
   },
-  created() {
-    this.fetchData();
-  
-  }
 };
 </script>
+
 
 <style scoped>
 .modal {
@@ -104,6 +70,7 @@ export default {
   border-radius: 5px;
   max-width: 600px; /* Adjust the maximum width as needed */
   width: 80%;
+  height: 53%;
 }
 
 .close {
@@ -124,6 +91,8 @@ export default {
   border-radius: 5px;
   padding: 20px;
   background-color: white;
+  height: 90%;
+
 }
 
 .card__title {
@@ -138,6 +107,9 @@ export default {
 
 .card__title h3 {
   margin: 0;
+  position: relative;
+    left: 140px;
+
 }
 
 .card__body {
@@ -146,13 +118,25 @@ export default {
 
 .half {
   flex: 1;
-  padding: 0 10px;
+  padding: 0 30px;
+}
+.featured_text{
+  position:relative;
+  left: 290px;
+    top: 45px;
 }
 
 .image img {
-  max-width: 100%;
+  max-width: 15%;
   height: auto;
+  position: fixed;
+  bottom: 175px;
+  display: flex;
+  margin-bottom: 95px;
+
 }
+
+
 
 .description p {
   margin-bottom: 10px;
